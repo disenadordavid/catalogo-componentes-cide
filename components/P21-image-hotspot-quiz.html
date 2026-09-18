@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz sobre imagen · P21 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P21</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+  <style>
+    .quiz-img{position:relative;max-width:560px;aspect-ratio:16/10;background:linear-gradient(140deg,var(--bg-elevated),var(--bg-strong));border:1px solid var(--border);border-radius:var(--radius-l);overflow:hidden;box-shadow:var(--sh-card);cursor:crosshair}
+    .target{position:absolute;width:44px;height:44px;border:3px solid var(--accent);border-radius:50%;display:none;pointer-events:none;box-shadow:0 0 0 6px rgba(247,179,159,.25)}
+    .target.hit{border-color:var(--ok);background:var(--ok-bg)}
+    .target.miss{display:none}
+    .marker{position:absolute;transform:translate(-50%,-50%);font-size:1.2rem}
+    .qz-x{color:var(--err);font-weight:900}
+    .qz-check{color:var(--ok);font-weight:900}
+  </style>
+  <p class="kicker">Preset P21 · image-hotspot-quiz</p>
+  <h2 style="margin:12px 0 6px">Haz clic en la zona correcta</h2>
+  <p class="muted" style="margin-bottom:14px">En esta ilustración del aula cooperativa, haz clic sobre la zona donde debe ir la pizarra de acuerdos.</p>
+  <div class="quiz-img" id="scene">
+    <div class="target" id="target" style="top:38%;left:52%"></div>
+  </div>
+  <div class="feedback" id="fbi" style="margin-top:14px"></div>
+  <button class="btn" style="margin-top:10px">Reintentar ↺</button>
+  
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+<script>(()=>{
+ /* Todo vive DENTRO de este cierre y se resuelve POR INSTANCIA. Antes declaraba `const scene`
+    y `const target` en el ámbito global —con el preset puesto dos veces en una página el
+    segundo bloque moría con "SyntaxError: Identifier 'scene' has already been declared"— y
+    usaba getElementById, que resuelve siempre el PRIMER bloque (el botón del segundo borraba
+    los marcadores del primero). */
+ document.querySelectorAll('.quiz-img').forEach(scene=>{
+  /* Idempotencia: si el bloque de script aparece dos veces (varias instancias en una unidad),
+     la segunda copia no debe volver a enganchar los mismos listeners. Mismo recurso que usa
+     initWordsearch en cide.js (grid.dataset.initialized). */
+  if(scene.dataset.quizInit) return;
+  scene.dataset.quizInit='1';
+  const target=scene.querySelector('.target');
+  /* El feedback y el botón "Reintentar" son HERMANOS posteriores del bloque, no hijos. */
+  let fb=null,boton=null,n=scene.nextElementSibling;
+  while(n && (!fb || !boton)){
+   if(!fb && n.classList && n.classList.contains('feedback')) fb=n;
+   if(!boton && n.tagName==='BUTTON') boton=n;
+   n=n.nextElementSibling;
+  }
+  const reset=()=>{
+   if(target){target.style.display='none';target.classList.remove('hit');}
+   scene.querySelectorAll('.marker').forEach(m=>m.remove());
+   if(fb) fb.className='feedback';
+  };
+  if(boton) boton.addEventListener('click',reset);
+  scene.addEventListener('click',e=>{
+   const r=scene.getBoundingClientRect();
+   const x=(e.clientX-r.left)/r.width*100;const y=(e.clientY-r.top)/r.height*100;
+   // zona objetivo centrada en (52%,38%) con radio ~12%
+   const dist=Math.hypot((x-52)/12,(y-38)/12);
+   const mark=document.createElement('span');mark.className='marker';mark.style.left=x+'%';mark.style.top=y+'%';
+   mark.textContent=dist<=1?'✓':'x';mark.classList.add(dist<=1?'qz-check':'qz-x');
+   scene.appendChild(mark);
+   if(dist<=1){
+    /* El aro verde que la diseñadora escribió: sin esto .target.hit era inalcanzable y
+       reset() ocultaba algo que nunca se había mostrado. */
+    if(target){target.style.display='block';target.classList.add('hit');}
+    if(fb){fb.textContent='¡Correcto! Identificaste la zona exacta.';fb.className='feedback ok';}
+   }else{
+    if(fb){fb.textContent='Casi. Busca el área central junto a la mesa de acuerdos.';fb.className='feedback no';}
+   }
+  });
+ });
+})();</script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P21'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

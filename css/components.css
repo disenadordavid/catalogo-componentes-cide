@@ -1,0 +1,498 @@
+/* ============================================================
+   CIDE DESIGN SYSTEM · Components (GENERADO desde components/P*.html)
+   Fuente centralizada del CSS de todos los presets (P01–P28).
+   CADA preset vive en SU PROPIA capa CSS (@layer cide-Pxx) para que los
+   selectores genéricos (.on, .show, .correct, .chip...) de un preset NO
+   colisionen con los de otro ni pisen base.css (que queda como capa base).
+   Uso en un curso:
+     <link rel="stylesheet" href=".../design-system/css/tokens.css">
+     <link rel="stylesheet" href=".../design-system/css/base.css">
+     <link rel="stylesheet" href=".../design-system/css/components.css">
+   Estructura canónica de markup e interactividad: js/cide.js (data-*).
+   NO editar a mano: regenerar con scripts/gen_components_css.py
+   ============================================================ */
+@layer base, cide-P01, cide-P02, cide-P03, cide-P04, cide-P05, cide-P06,
+       cide-P07, cide-P08, cide-P09, cide-P10, cide-P11, cide-P12,
+       cide-P13, cide-P14, cide-P15, cide-P16, cide-P17, cide-P18,
+       cide-P19, cide-P20, cide-P21, cide-P22, cide-P23, cide-P24,
+       cide-P25, cide-P26, cide-P27;
+@layer cide-P01{
+  .progress-track{height:6px;background:var(--border);border-radius:99px;margin:26px 0;overflow:hidden}
+      .progress-fill{height:100%;background:var(--brand);width:40%;transition:width var(--t-slow) var(--ease)}
+      .screen-demo{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-l);padding:40px;min-height:200px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-card)}
+      .navrow{display:flex;justify-content:space-between;margin-top:22px}
+}
+
+@layer cide-P02{
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+      .tab{border:1px solid var(--border);background:var(--bg-strong);border-radius:var(--radius-pill);padding:10px 18px;cursor:pointer;transition:all var(--t-fast) var(--ease)}
+      .tab:hover{border-color:var(--accent);transform:translateY(-2px)}
+      .tab.active{background:var(--brand);color:var(--text-on-accent);border-color:var(--brand);font-weight:700}
+      .panel{display:none;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-l);padding:30px;box-shadow:var(--sh-card);margin-top:8px}
+      .panel.show{display:block}
+}
+
+@layer cide-P03{
+  .flip{width:300px;height:200px;perspective:1200px;cursor:pointer;margin:20px auto}
+      .flip-inner{position:relative;width:100%;height:100%;transition:transform var(--t-slow) var(--ease);transform-style:preserve-3d}
+      .flip.flipped .flip-inner{transform:rotateY(180deg)}
+      .flip-face{position:absolute;inset:0;backface-visibility:hidden;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:center;padding:20px;border-radius:var(--radius-l);border:1px solid var(--border);box-shadow:var(--sh-card);overflow-y:auto;overflow-x:hidden}
+      .flip-front{background:var(--bg-elevated)}
+      .flip-back{background:var(--brand);color:var(--text-on-accent);transform:rotateY(180deg)}
+}
+
+@layer cide-P04{
+  .layer-btn{display:inline-block;border:1px solid var(--border);background:var(--bg-strong);border-radius:var(--radius-m);padding:12px 18px;margin:6px;cursor:pointer;transition:all var(--t-fast) var(--ease)}
+      .layer-btn:hover{border-color:var(--accent);transform:translateY(-2px)}
+      .layer-btn.on{background:var(--brand);color:var(--text-on-accent);border-color:var(--brand)}
+      .layer{display:none;margin-top:18px;background:var(--bg-elevated);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:0 var(--radius-m) var(--radius-m) 0;padding:24px;box-shadow:var(--sh-card)}
+      .layer.show{display:block}
+}
+
+@layer cide-P05{
+  .scene{position:relative;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-l);min-height:340px;box-shadow:var(--sh-card);overflow:hidden}
+      .hotspot{position:absolute;width:34px;height:34px;border-radius:50%;background:var(--accent);border:3px solid var(--bg-strong);cursor:pointer;z-index:var(--z-dropdown);transition:transform var(--t-fast) var(--ease);box-shadow:0 4px 12px rgba(34,74,55,.2)}
+      .hotspot:hover{transform:scale(1.15)}
+      /* El anillo se dibujaba con un ::after de inset:-8px + scale(1.6): el área de clic del
+         pseudo-elemento se estiraba 8px sobre los vecinos y le ROBABA el clic al botón
+         «Siguiente» de la hoja (medido con elementsFromPoint: devolvía los 4 puntos del
+         Decreto 962 y recién después el botón). El mismo latido, sin agrandar el área de
+         clic: un box-shadow que se expande (la sombra no entra en el hit-test del elemento). */
+      .hotspot{animation:pulse 2s infinite}
+      @keyframes pulse{0%{box-shadow:0 0 0 0 var(--accent)}100%{box-shadow:0 0 0 16px transparent}}
+}
+
+@layer cide-P06{
+  .tl{position:relative;margin:30px 0;padding-left:30px}
+      .tl::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:3px;background:var(--border)}
+      .tl-item{position:relative;margin-bottom:26px}
+      .tl-item::before{content:'';position:absolute;left:-30px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--brand);border:3px solid var(--bg)}
+      .tl-card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-m);padding:18px 22px;box-shadow:var(--sh-card)}
+
+      /* Variante PLEGABLE — la que usan los cursos. El cuerpo nace cerrado y cide.js (initTimeline)
+         lo abre al clic poniendo max-height = scrollHeight, con el chevron girando.
+         Estas tres reglas FALTABAN en el design system, así que cada curso las reescribía a mano en
+         su PAGE_CSS (ver cide-production-build/references/hamburger-timeline-2026-08-27.md).
+         Markup canónico de la variante plegable:
+           <div class="tl-card" role="button" tabindex="0" aria-expanded="false">
+             <h3>Paso 1 <span class="chev">▾</span></h3>
+             <div class="tl-body"><p class="muted">Contenido literal de la diseñadora.</p></div>
+           </div> */
+      .tl-body{max-height:0;overflow:hidden;transition:max-height .32s var(--ease)}
+      .tl-card .chev{transition:transform var(--t-fast) var(--ease)}
+      .tl-card.open .chev{transform:rotate(180deg)}
+}
+
+@layer cide-P07{
+  .carousel{display:flex;gap:16px;overflow-x:auto;padding:10px 4px 20px;scroll-snap-type:x mandatory}
+      .carousel::-webkit-scrollbar{height:8px}
+      .carousel::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
+      .c-card{flex:0 0 260px;scroll-snap-align:start;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-l);padding:24px;box-shadow:var(--sh-card)}
+      /* Estado activo: cide.js (initCards) agrega role="button" + tabindex y rota la clase .active al
+         hacer clic, pero el design system no la estilizaba — la tarjeta quedaba con cara de botón y
+         sin ningún cambio visible al pulsarla. Cada curso se escribía esta regla en su PAGE_CSS. */
+      .c-card.active{border-color:var(--brand);background:var(--ok-bg)}
+      .c-dots{display:flex;gap:8px;justify-content:center;margin-top:8px}
+      .c-dot{width:10px;height:10px;border-radius:50%;background:var(--border);cursor:pointer}
+      .c-dot.on{background:var(--brand)}
+}
+
+@layer cide-P08{
+  .acc-item{border:1px solid var(--border);border-radius:var(--radius-m);margin-bottom:10px;background:var(--bg-strong);overflow:hidden}
+      .acc-head{width:100%;text-align:left;background:none;border:0;padding:18px 22px;font-size:1rem;font-weight:700;color:var(--text-primary);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+      .acc-head:hover{color:var(--brand)}
+      .acc-head .chev{transition:transform var(--t-fast) var(--ease)}
+      .acc-item.open .chev{transform:rotate(180deg)}
+      .acc-body{max-height:0;overflow:hidden;transition:max-height var(--t-slow) var(--ease)}
+      .acc-body-inner{padding:0 22px 20px}
+}
+
+@layer cide-P09{
+  .q-opt{display:block;width:100%;text-align:left;border:1px solid var(--border);background:var(--bg-strong);border-radius:var(--radius-m);padding:16px 20px;margin:10px 0;cursor:pointer;transition:all var(--t-fast) var(--ease)}
+      .q-opt:hover{border-color:var(--accent);transform:translateX(4px);box-shadow:var(--sh-card)}
+      .q-opt.correct{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);font-weight:700}
+      .q-opt.wrong{border-color:var(--err);background:var(--err-bg);color:var(--err)}
+}
+
+@layer cide-P10{
+  .zones{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+      .zone{min-height:120px;border:2px dashed var(--border);border-radius:var(--radius-m);padding:14px;background:var(--bg-elevated)}
+      .chip{display:inline-block;background:var(--bg-strong);border:1px solid var(--border);border-radius:var(--radius-pill);padding:8px 16px;margin:4px;cursor:grab;user-select:none;box-shadow:var(--sh-card)}
+      .chip.dragging{opacity:.4}
+      .chip.sel{outline:2px solid var(--brand);outline-offset:2px}
+      .zone.over{border-color:var(--accent);background:var(--ok-bg)}
+      .ok-chip{background:var(--brand);color:var(--text-on-accent);font-weight:700}
+      .bad-chip{background:var(--err-bg);border-color:var(--err)}
+}
+
+@layer cide-P11{
+  .slider-row{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-l);padding:24px;margin:14px 0;box-shadow:var(--sh-card)}
+      input[type=range]{width:100%;height:6px;border-radius:99px;background:var(--border);appearance:none;margin-top:14px}
+      input[type=range]::-webkit-slider-thumb{appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);border:3px solid var(--bg-strong);cursor:pointer;box-shadow:var(--sh-card)}
+      input[type=range]:disabled{opacity:.5}
+      .sl-val{font-family:var(--ff-display-heavy);font-size:1.4rem;color:var(--brand)}
+}
+
+@layer cide-P12{
+  .scroll-box{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-l);padding:24px;height:280px;overflow-y:auto;box-shadow:var(--sh-card)}
+      .scroll-box::-webkit-scrollbar{width:10px}
+      .scroll-box::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
+}
+
+@layer cide-P13{
+  .fake-video{aspect-ratio:16/9;border-radius:var(--radius-l);border:1px solid var(--border);background:linear-gradient(135deg,var(--bg-elevated),var(--bg-strong));display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-card)}
+}
+
+@layer cide-P14{
+  .seq{min-height:60vh;display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding-top:110px}
+      .step{opacity:0;transform:translateY(40px);padding:26px 30px;border:1px solid var(--border);border-radius:var(--radius-l);background:var(--bg-elevated);box-shadow:var(--sh-card)}
+}
+
+@layer cide-P15{
+  .big-score{font-family:var(--ff-display-heavy);font-size:5rem;color:var(--brand)}
+}
+
+@layer cide-P16{
+  .blank{display:inline-block;min-width:140px;border-bottom:2px solid var(--brand);background:transparent;color:var(--text-primary);font-family:var(--ff-body);font-size:1rem;padding:4px 8px;text-align:center}
+      .blank:focus{outline:none;background:var(--ok-bg);border-radius:var(--radius-s)}
+      .blank.done{border-bottom-color:var(--ok);color:var(--ok);font-weight:700}
+      .blank.bad{border-bottom-color:var(--err);color:var(--err)}
+}
+
+@layer cide-P17{
+  .zones{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+      @media(max-width:820px){.zones{grid-template-columns:1fr}}
+      .zone{min-height:140px;border:2px dashed var(--border);border-radius:var(--radius-m);padding:12px;background:var(--bg-elevated)}
+      .zone h4{margin-bottom:8px;font-size:.9rem;letter-spacing:.08em}
+      .zone.over{border-color:var(--accent);background:var(--ok-bg)}
+      .chip{display:inline-block;background:var(--bg-strong);border:1px solid var(--border);border-radius:var(--radius-pill);padding:8px 14px;margin:4px;cursor:grab;user-select:none;box-shadow:var(--sh-card)}
+      .chip.dragging{opacity:.4}
+      .chip.bad{background:var(--err-bg);border-color:var(--err);color:var(--err)}
+      .chip.placed{background:var(--brand);color:var(--text-on-accent);border-color:var(--brand);cursor:default}
+}
+
+@layer cide-P18{
+  .branch-card{display:none}
+      .branch-card.show{display:block;animation:fadein .3s var(--ease)}
+      @keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+      .choice{display:block;width:100%;text-align:left;border:1px solid var(--border);background:var(--bg-strong);border-radius:var(--radius-m);padding:16px 18px;margin:10px 0;cursor:pointer;transition:all var(--t-fast) var(--ease);box-shadow:var(--sh-card)}
+      .choice:hover{border-color:var(--accent);transform:translateX(6px)}
+      .path-badge{display:inline-block;padding:4px 12px;border-radius:var(--radius-pill);font-size:.78rem;font-weight:700;letter-spacing:.06em;margin-bottom:8px}
+      .path-badge.buena{background:var(--ok-bg);color:var(--ok)}
+      .path-badge.moderada{background:var(--warn-bg);color:#8a7a1a}
+      .path-badge.riesgo{background:var(--err-bg);color:var(--err)}
+      .restart{margin-top:16px}
+}
+
+@layer cide-P19{
+  .hamb{position:fixed;right:26px;top:22px;z-index:var(--z-sticky);width:46px;height:46px;border-radius:50%;border:1px solid var(--border);background:var(--bg-strong);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;box-shadow:var(--sh-card);transition:all var(--t-fast) var(--ease)}
+    .hamb:hover{border-color:var(--accent);transform:rotate(90deg)}
+    .hamb span{display:block;width:18px;height:2px;background:var(--brand);border-radius:2px;transition:all var(--t-fast) var(--ease)}
+    .menu{position:fixed;top:0;right:-320px;visibility:hidden;width:300px;height:100vh;z-index:var(--z-overlay);background:var(--bg-elevated);border-left:1px solid var(--border);padding:90px 24px 24px;overflow-y:auto;overscroll-behavior:contain;transition:right var(--t-slow) var(--ease);box-shadow:var(--sh-modal)}
+    .menu.open{right:0;visibility:visible}
+    .menu a{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;border-radius:var(--radius-m);color:var(--text-primary);text-decoration:none;margin-bottom:4px;transition:background var(--t-fast) var(--ease)}
+    .menu a:hover{background:var(--ok-bg)}
+    .menu a.on{background:var(--brand);color:var(--text-on-accent);font-weight:700}
+    .menu a span.num{font-family:var(--ff-display-heavy);font-size:.8rem;opacity:.55}
+    .menu-backdrop{position:fixed;inset:0;z-index:calc(var(--z-overlay) - 1);background:rgba(26,30,22,.4);opacity:0;pointer-events:none;transition:opacity var(--t-fast) var(--ease)}
+    .menu-backdrop.show{opacity:1;pointer-events:auto}
+}
+
+@layer cide-P20{
+  .gterm{color:var(--brand);font-weight:700;border-bottom:2px dotted var(--accent);cursor:pointer;position:relative;transition:background var(--t-fast) var(--ease)}
+      .gterm:hover,.gterm:focus{background:var(--ok-bg)}
+      .gterm::after{content:'?';display:inline-block;font-size:.62rem;background:var(--accent);color:var(--text-secondary);border-radius:50%;width:14px;height:14px;line-height:14px;text-align:center;margin-left:5px;vertical-align:super}
+      .tip{position:absolute;bottom:130%;left:0;z-index:var(--z-dropdown);width:230px;background:var(--bg-strong);border:1px solid var(--border);border-radius:var(--radius-m);padding:12px 14px;box-shadow:var(--sh-elevated);font-size:.85rem;line-height:1.5;color:var(--text-primary);opacity:0;pointer-events:none;transform:translateY(6px);transition:all var(--t-fast) var(--ease)}
+      .gterm:hover .tip,.gterm:focus .tip{opacity:1;pointer-events:auto;transform:none}
+      .gterm .tip b{color:var(--brand);display:block;margin-bottom:3px}
+}
+
+@layer cide-P21{
+  .quiz-img{position:relative;max-width:560px;aspect-ratio:16/10;background:linear-gradient(140deg,var(--bg-elevated),var(--bg-strong));border:1px solid var(--border);border-radius:var(--radius-l);overflow:hidden;box-shadow:var(--sh-card);cursor:crosshair}
+      .target{position:absolute;width:44px;height:44px;border:3px solid var(--accent);border-radius:50%;display:none;pointer-events:none;box-shadow:0 0 0 6px rgba(247,179,159,.25)}
+      .target.hit{border-color:var(--ok);background:var(--ok-bg)}
+      .target.miss{display:none}
+      .marker{position:absolute;transform:translate(-50%,-50%);font-size:1.2rem}
+      .qz-x{color:var(--err);font-weight:900}
+      .qz-check{color:var(--ok);font-weight:900}
+}
+
+@layer cide-P22{
+  /* P22 flippingbook — libro de páginas con vista doble cara */
+      .book {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px auto;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .book-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        max-width: 720px;
+        width: 100%;
+        height: 420px;
+      }
+      /* Páginas base */
+      .page-left, .page-right {
+        flex: 0 0 50%;
+        padding: 32px 28px 32px 36px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        box-shadow: 0 4px 24px rgba(34,74,55,.06);
+      }
+      .page-left {
+        border-radius: var(--radius-l) 0 0 var(--radius-l);
+        border-right: none;
+        border-left: 8px solid var(--brand);
+      }
+      .page-right {
+        border-radius: 0 var(--radius-l) var(--radius-l) 0;
+        border-left: 4px solid var(--brand);
+        padding-left: 28px;
+        padding-right: 36px;
+      }
+      /* Voltea-hoja que cubre la página derecha y rota */
+      .flip-sheet {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        transform-origin: left center;
+        transform-style: preserve-3d;
+        transition: transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+        z-index: 10;
+      }
+      .flip-sheet.flipped {
+        transform: rotateY(-180deg);
+      }
+      .flip-sheet-face {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        padding: 32px 28px 32px 36px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--brand);
+        border-radius: 0 var(--radius-l) var(--radius-l) 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        overflow-wrap: break-word;
+        word-break: break-word;
+      }
+      .flip-sheet-back {
+        transform: rotateY(180deg);
+        background: var(--bg-strong);
+        border-radius: var(--radius-l) 0 0 var(--radius-l);
+        border-left: 1px solid var(--border);
+        border-right: 4px solid var(--brand);
+        padding-left: 36px;
+        padding-right: 28px;
+      }
+      /* Números de página — sticky: si la página scrollea (texto largo), el número queda a la
+         vista abajo en vez de irse con el texto. background:inherit copia el fondo de la página
+         (elevado o fuerte según la cara) para que el texto no pase por detrás. */
+      .page-num {
+        position: sticky;
+        bottom: 0;
+        background: inherit;
+        margin-top: auto;
+        padding-top: 16px;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        text-align: center;
+      }
+      /* Controles */
+      .book-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 18px;
+      }
+      .book-prev, .book-next { min-width: 90px; }
+      /* Responsive: apilar páginas en móvil */
+      @media (max-width: 640px) {
+        .book-container { height: auto; flex-direction: column; perspective: none; }
+        .page-left, .page-right {
+          flex: none;
+          border-radius: var(--radius-l);
+          border-left: 1px solid var(--border);
+          border-right: 1px solid var(--border);
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        .page-left { border-bottom: none; border-radius: var(--radius-l) var(--radius-l) 0 0; }
+        .page-right { border-radius: 0 0 var(--radius-l) var(--radius-l); }
+        .flip-sheet { display: none !important; }
+        .book-prev, .book-next { min-width: 70px; }
+      }
+}
+
+@layer cide-P23{
+  .rise-flow{position:relative}
+      .rise-progress{position:fixed;top:0;left:0;right:0;height:4px;background:var(--border);z-index:var(--z-sticky)}
+      .rise-progress-fill{height:100%;width:0;background:var(--brand);transition:width var(--t-slow) var(--ease)}
+
+      .rise-section{
+        padding:var(--sp-6) var(--sp-5);
+        margin-bottom:var(--sp-5);
+        background:var(--bg-elevated);
+        border:1px solid var(--border);
+        border-left:4px solid transparent;
+        border-radius:var(--radius-l);
+        box-shadow:var(--sh-card);
+        transition:border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+      }
+      .rise-section[data-complete="1"]{
+        border-left-color:var(--ok);
+        box-shadow:var(--sh-elevated);
+      }
+
+      .rise-grid-2col{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-5);align-items:center}
+      .rise-grid-reverse .rise-img{order:2}
+      @media(max-width:820px){.rise-grid-2col{grid-template-columns:1fr}.rise-grid-reverse .rise-img{order:0}}
+
+      .rise-img{
+        background:linear-gradient(135deg,var(--bg-strong),var(--border));
+        border-radius:var(--radius-m);
+        min-height:180px;
+        display:flex;align-items:center;justify-content:center;
+        color:var(--text-muted);font-weight:700;letter-spacing:.1em;font-size:.85rem;
+        border:1px solid var(--border);
+      }
+
+      .rise-list{list-style:none;padding:0}
+      .rise-list li{
+        padding:12px 0 12px 32px;
+        border-bottom:1px solid var(--border);
+        position:relative;
+      }
+      .rise-list li:last-child{border-bottom:0}
+      .rise-list li::before{
+        content:"→";
+        position:absolute;left:0;top:12px;
+        color:var(--accent);font-weight:700;
+      }
+
+      .rise-steps{display:flex;flex-direction:column;gap:var(--sp-4)}
+      .rise-step{display:flex;gap:var(--sp-4);align-items:flex-start}
+      .rise-num{
+        flex-shrink:0;width:44px;height:44px;border-radius:50%;
+        background:var(--brand);color:var(--text-on-accent);
+        display:flex;align-items:center;justify-content:center;
+        font-weight:700;font-size:1.1rem;
+      }
+
+      .rise-quote{
+        margin:0;padding:var(--sp-5);
+        background:var(--bg-strong);
+        border-left:4px solid var(--accent);
+        border-radius:var(--radius-m);
+        font-size:var(--fs-lead);
+        line-height:1.6;
+      }
+      .rise-quote p{font-style:italic;color:var(--text-primary)}
+      .rise-quote cite{display:block;margin-top:var(--sp-3);font-size:var(--fs-kicker);color:var(--text-muted);font-style:normal}
+
+      /* ---- Reutiliza markup canónico P08 (sin onclick inline; cide.js maneja .acc-head) ---- */
+      .acc-item{border:1px solid var(--border);border-radius:var(--radius-m);margin-bottom:10px;background:var(--bg-strong);overflow:hidden}
+      .acc-head{width:100%;text-align:left;background:none;border:0;padding:18px 22px;font-size:1rem;font-weight:700;color:var(--text-primary);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+      .acc-head:hover{color:var(--brand)}
+      .acc-head .chev{transition:transform var(--t-fast) var(--ease)}
+      .acc-item.open .chev{transform:rotate(180deg)}
+      .acc-body{max-height:0;overflow:hidden;transition:max-height var(--t-slow) var(--ease)}
+      .acc-body-inner{padding:0 22px 20px}
+
+      /* ---- Quiz P09 vía CIDE.quiz() ---- */
+      [data-rise-quiz] .opt{display:block;width:100%;text-align:left;border:1px solid var(--border);background:var(--bg-strong);border-radius:var(--radius-m);padding:16px 20px;margin:10px 0;cursor:pointer;transition:all var(--t-fast) var(--ease)}
+      [data-rise-quiz] .opt:hover{border-color:var(--accent);transform:translateX(4px);box-shadow:var(--sh-card)}
+      [data-rise-quiz] .opt.correct{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);font-weight:700}
+      [data-rise-quiz] .opt.wrong{border-color:var(--err);background:var(--err-bg);color:var(--err)}
+}
+
+@layer cide-P24{
+  .wordsearch-grid{display:grid;gap:3px;width:100%;max-width:640px;margin:16px auto}
+    .wordsearch-cell{aspect-ratio:1;border:1px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:var(--ff-body);font-size:1rem;background:var(--bg-strong);color:var(--text-primary);cursor:pointer;transition:all .15s;user-select:none}
+    .wordsearch-cell:hover{border-color:var(--accent)}
+    .wordsearch-cell.found{background:var(--ok-bg);color:var(--ok);border-color:var(--ok);font-weight:700}
+    .wordsearch-words{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+    .wordsearch-chip{padding:4px 10px;border:1px solid var(--border);border-radius:20px;background:var(--bg-strong);font-size:.85rem;color:var(--text-secondary);transition:all .3s}
+    .wordsearch-chip.found{background:var(--ok-bg);color:var(--ok);border-color:var(--ok);text-decoration:line-through;font-weight:700}
+}
+
+@layer cide-P25{
+  .grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:18px 0}
+    .grid-card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-l);padding:20px;transition:all var(--t-fast) var(--ease)}
+    .grid-card:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:var(--sh-card)}
+    .grid-card-ico{width:46px;height:46px;border-radius:50%;background:var(--ok-bg);color:var(--ok);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:12px}
+    .grid-card h3{margin:0 0 8px;color:var(--brand);font-family:var(--ff-display-heavy);font-size:1.15rem}
+    .grid-card ul{margin:0;padding-left:18px}
+    .grid-card li{font-size:.92rem;line-height:1.6;color:var(--text-secondary);margin:3px 0}
+}
+
+@layer cide-P26{
+  .casestudy-card{margin-bottom:14px}
+    .casestudy-card textarea{width:100%;min-height:80px;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-m);background:var(--bg-strong);color:var(--text-primary);font-family:var(--ff-body);resize:vertical;font-size:.95rem;transition:border-color var(--t-fast) var(--ease)}
+    .casestudy-card textarea:focus{border-color:var(--brand);outline:none;box-shadow:0 0 0 3px var(--ok-bg)}
+    .casestudy-card textarea:disabled{opacity:.6;cursor:not-allowed}
+    .casestudy-feedback{margin-left:auto;font-size:.9rem;font-weight:600}
+    .casestudy-cierre{display:none;margin-top:16px;padding:16px 20px;background:var(--ok-bg);border:1px solid var(--ok);border-radius:var(--radius-m);color:var(--ok);font-weight:600}
+    .casestudy-cierre.show{display:block}
+}
+
+@layer cide-P27{
+  .cierre-box{background:linear-gradient(135deg,var(--ok-bg),transparent);border:1px solid var(--ok);border-radius:var(--radius-l);padding:26px;margin:18px 0}
+    .cierre-box .kicker{color:var(--ok);margin-bottom:6px}
+    .cierre-box p{font-size:1.1rem;line-height:1.7}
+    .cierre-repaso{margin-top:16px;padding:16px 20px;background:var(--bg-strong);border-left:3px solid var(--brand);border-radius:var(--radius-s);font-size:1rem;line-height:1.7;color:var(--text-secondary)}
+    .cierre-repaso strong{display:block;color:var(--text-primary);margin-bottom:6px}
+}
+
+@layer cide-P28{
+  /* P28 crucigrama — grilla real con celdas numeradas, pistas y comprobación.
+         El PARSER del CSS de presets (scripts/gen_components_css.py) extrae este bloque
+         tal cual a su capa @layer cide-P28, así que todo va prefijado .cw-. */
+      /* flex + wrap: si la grilla no entra al lado de las pistas, las pistas bajan solas
+         (una grilla de 17 columnas mide 610px y no siempre hay lugar) */
+      .cw{--cw-cell:34px;display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start;margin:18px 0}
+      @media(max-width:760px){.cw{--cw-cell:26px}}
+      .cw-wrap{flex:1 1 620px;overflow-x:auto;padding:4px}
+      /* las columnas salen de --cw-cols (lo pone el markup con la grilla resuelta) */
+      .cw-grid{display:grid;gap:2px;margin:0 auto;grid-template-columns:repeat(var(--cw-cols,12),var(--cw-cell));grid-auto-rows:var(--cw-cell);justify-content:center}
+      .cw-cell{width:var(--cw-cell);height:var(--cw-cell);position:relative}
+      .cw-cell.is-black{background:transparent;border:0}
+      .cw-cell:not(.is-black){background:var(--bg-elevated);border:1px solid var(--border);border-radius:4px}
+      .cw-cell.sel{background:var(--ok-bg);border-color:var(--brand)}
+      .cw-cell.ok{background:var(--ok-bg);border-color:var(--ok)}
+      .cw-cell.bad{border-color:var(--err)}
+      .cw-num{position:absolute;top:1px;left:3px;font-size:.55rem;font-weight:700;color:var(--brand);line-height:1;pointer-events:none}
+      .cw-input{width:100%;height:100%;border:0;background:transparent;text-align:center;font-family:var(--ff-body);
+        font-size:1.05rem;font-weight:700;color:var(--text-primary);text-transform:uppercase;border-radius:4px}
+      .cw-input:focus{outline:2px solid var(--brand);outline-offset:-2px}
+      .cw-input.ok{color:var(--ok)}
+      .cw-input.bad{color:var(--err)}
+      .cw-clues{flex:1 1 240px;display:grid;gap:18px}
+      .cw-group h3{margin:0 0 8px;font-family:var(--ff-display-heavy);color:var(--brand);font-size:1rem}
+      .cw-clue{display:grid;grid-template-columns:26px 1fr;gap:8px;margin:0 0 10px;font-size:.9rem;line-height:1.5;
+        color:var(--text-secondary);cursor:pointer;border-radius:var(--radius-s);padding:4px 6px}
+      .cw-clue:hover{background:var(--ok-bg)}
+      .cw-clue.on{background:var(--ok-bg);box-shadow:inset 0 0 0 1px var(--brand)}
+      .cw-clue b{color:var(--brand)}
+      .cw-len{opacity:.75}
+      .cw-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+}
+

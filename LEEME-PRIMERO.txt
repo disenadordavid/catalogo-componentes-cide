@@ -1,0 +1,13 @@
+CATÁLOGO DE COMPONENTES · CIDE
+==============================
+
+ANTES DE ABRIR NADA:
+
+1. Descomprime esta carpeta completa (clic derecho sobre el ZIP -> «Extraer todo…»).
+2. Abre el archivo index.html QUE ESTÁ ADENTRO DE LA CARPETA DESCOMPRIMIDA.
+   (Si lo abres desde adentro del ZIP, el catálogo se ve sin las tipografías de la
+   marca y los componentes no cargan.)
+3. La carpeta completa tiene que tener: index.html, components, css, js, lib, fonts.
+
+Después: haz clic en los componentes para probarlos, y deja tus notas en cada ficha.
+Al final, el botón «Descargar mis notas» las junta todas en un archivo.

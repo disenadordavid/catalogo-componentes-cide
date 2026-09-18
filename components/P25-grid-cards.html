@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grid de cards · P25 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style>
+  .grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:18px 0}
+  .grid-card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-l);padding:20px;transition:all var(--t-fast) var(--ease)}
+  .grid-card:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:var(--sh-card)}
+  .grid-card-ico{width:46px;height:46px;border-radius:50%;background:var(--ok-bg);color:var(--ok);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:12px}
+  .grid-card h3{margin:0 0 8px;color:var(--brand);font-family:var(--ff-display-heavy);font-size:1.15rem}
+  .grid-card ul{margin:0;padding-left:18px}
+  .grid-card li{font-size:.92rem;line-height:1.6;color:var(--text-secondary);margin:3px 0}
+</style>
+</head>
+<body>
+
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P25</div></div>
+
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+  <p class="kicker">Tema · P25 · grid-cards</p>
+  <h1 style="margin:12px 0 6px">Grid de cards</h1>
+  <p class="muted" style="margin-bottom:20px;max-width:760px">Tarjetas con iconos en grid responsive.</p>
+
+  <div class="grid-cards">
+    <div class="grid-card">
+      <div class="grid-card-ico" aria-hidden="true">🛠️</div>
+      <h3>De servicios</h3>
+      <ul><li>Ofrecen servicios básicos o especializados.</li></ul>
+    </div>
+    <div class="grid-card">
+      <div class="grid-card-ico" aria-hidden="true">🛒</div>
+      <h3>De consumo</h3>
+      <ul><li>Adquieren productos para sus socios a mejor precio.</li></ul>
+    </div>
+    <div class="grid-card">
+      <div class="grid-card-ico" aria-hidden="true">🌾</div>
+      <h3>Agropecuarias</h3>
+      <ul><li>Apoyan a productores del campo.</li><li>Asisten en producción y comercialización.</li></ul>
+    </div>
+    <div class="grid-card">
+      <div class="grid-card-ico" aria-hidden="true">🏭</div>
+      <h3>De producción</h3>
+      <ul><li>Producen bienes con trabajo colectivo.</li></ul>
+    </div>
+    <div class="grid-card">
+      <div class="grid-card-ico" aria-hidden="true">💰</div>
+      <h3>De ahorro y crédito</h3>
+      <ul><li>Brindan servicios financieros como ahorro y préstamos.</li></ul>
+    </div>
+    <div class="grid-card">
+      <div class="grid-card-ico" aria-hidden="true">🤝</div>
+      <h3>De trabajo asociado</h3>
+      <ul><li>Los socios son trabajadores y dueños al mismo tiempo.</li></ul>
+    </div>
+  </div>
+
+</main>
+
+<script src="../js/cide.js"></script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P25'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

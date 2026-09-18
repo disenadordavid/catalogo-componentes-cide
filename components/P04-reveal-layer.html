@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revelado por capas · P04 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P04</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+  <style>
+    .layer-btn{display:inline-block;border:1px solid var(--border);background:var(--bg-strong);border-radius:var(--radius-m);padding:12px 18px;margin:6px;cursor:pointer;transition:all var(--t-fast) var(--ease)}
+    .layer-btn:hover{border-color:var(--accent);transform:translateY(-2px)}
+    .layer-btn.on{background:var(--brand);color:var(--text-on-accent);border-color:var(--brand)}
+    .layer{display:none;margin-top:18px;background:var(--bg-elevated);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:0 var(--radius-m) var(--radius-m) 0;padding:24px;box-shadow:var(--sh-card)}
+    .layer.show{display:block}
+  </style>
+  <p class="kicker">Preset P04 · reveal-layer</p>
+  <h2 style="margin:12px 0 6px">Revelado de capas</h2>
+  <p class="muted" style="margin-bottom:14px">Cada botón destapa un panel de información.</p>
+  <div class="layers">
+    <div>
+      <button class="layer-btn" data-l="1">Capa 1</button>
+      <button class="layer-btn" data-l="2">Capa 2</button>
+      <button class="layer-btn" data-l="3">Capa 3</button>
+    </div>
+    <div class="layer" data-layer="1"><h3>Capa 1</h3><p class="muted">Contenido literal de la diseñadora.</p></div>
+    <div class="layer" data-layer="2"><h3>Capa 2</h3><p class="muted">Contenido literal de la diseñadora.</p></div>
+    <div class="layer" data-layer="3"><h3>Capa 3</h3><p class="muted">Contenido literal de la diseñadora.</p></div>
+  </div>
+  
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P04'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+[
+  {
+    "code": "P01",
+    "name": "Navegación con progreso",
+    "tech": "nav-buttons",
+    "cat": "Navegación",
+    "usa": "Botones anterior/siguiente, barra de progreso y menú de pantallas de la unidad.",
+    "datos": [
+      "Nada: lo arma virtualización en todas las pantallas."
+    ],
+    "antes": [
+      "botón Siguiente / Anterior, menú de diapositivas, barra de progreso (del curso original)"
+    ]
+  },
+  {
+    "code": "P02",
+    "name": "Explorador por pestañas",
+    "tech": "tab-explorer",
+    "cat": "Contenido",
+    "usa": "Un recurso con 2 a 6 apartados que se abren por pestañas, sin salir de la pantalla.",
+    "datos": [
+      "Título del recurso.",
+      "Nombre de cada pestaña / zona.",
+      "Texto de cada pestaña."
+    ],
+    "antes": [
+      "tabs verticales, pestañas, zonas clicables"
+    ]
+  },
+  {
+    "code": "P03",
+    "name": "Tarjeta que se voltea",
+    "tech": "flip-card",
+    "cat": "Contenido",
+    "usa": "Tarjetas con frente y reverso: se hace clic y la tarjeta gira para mostrar el texto.",
+    "datos": [
+      "Título del frente de cada tarjeta (uno por tarjeta).",
+      "Texto del reverso de cada tarjeta.",
+      "Si el frente lleva ícono: el archivo del ícono."
+    ],
+    "antes": [
+      "Flipping card (5 tarjetas con títulos…), Pila de tarjetas, Recurso tarjetas"
+    ]
+  },
+  {
+    "code": "P04",
+    "name": "Revelado de capas",
+    "tech": "reveal-layer",
+    "cat": "Contenido",
+    "usa": "Una imagen o escena de base, y al hacer clic aparece contenido encima (una capa a la vez).",
+    "datos": [
+      "La imagen o escena de fondo.",
+      "Qué se revela en cada capa y su texto."
+    ],
+    "antes": [
+      "pop up, explorador por zonas"
+    ]
+  },
+  {
+    "code": "P05",
+    "name": "Puntos calientes",
+    "tech": "hotspots-modal",
+    "cat": "Multimedia",
+    "usa": "Una infografía de fondo con puntos que se pueden clicar; cada punto abre un cuadro con su texto.",
+    "datos": [
+      "¡La infografía o imagen de fondo! (es obligatoria)",
+      "El texto de cada punto.",
+      "Dónde va cada punto (o lo ubicamos nosotros al ver la imagen)."
+    ],
+    "antes": [
+      "Infografía interactiva (puntos calientes), Infografía interactiva modales"
+    ]
+  },
+  {
+    "code": "P06",
+    "name": "Línea de tiempo",
+    "tech": "timeline-steps",
+    "cat": "Contenido",
+    "usa": "Una secuencia con fechas o pasos: hitos que se recorren en orden.",
+    "datos": [
+      "Fecha o nombre de cada paso (en orden).",
+      "Texto de cada paso."
+    ],
+    "antes": [
+      "línea de tiempo, rutas / pasos"
+    ]
+  },
+  {
+    "code": "P07",
+    "name": "Carrusel de tarjetas",
+    "tech": "carousel-cards",
+    "cat": "Contenido",
+    "usa": "Varias tarjetas que se recorren de lado (slide), con texto breve en cada una.",
+    "datos": [
+      "Título de cada tarjeta.",
+      "Texto corto de cada tarjeta."
+    ],
+    "antes": [
+      "Slide de imágenes, Slide de diapositivas simple, Carrusel de tarjetas"
+    ]
+  },
+  {
+    "code": "P08",
+    "name": "Acordeón",
+    "tech": "accordion-info",
+    "cat": "Contenido",
+    "usa": "Una lista de apartados que se abren y se cierran. Es también el menú de subtemas de un tema.",
+    "datos": [
+      "Nombre de cada apartado.",
+      "Texto de cada apartado."
+    ],
+    "antes": [
+      "menú numerado de subtemas, acordeón, audio + acordeón"
+    ]
+  },
+  {
+    "code": "P09",
+    "name": "Pregunta de selección única",
+    "tech": "quiz-mcq",
+    "cat": "Evaluación",
+    "usa": "Una pregunta con 3 o 4 opciones donde solo una es correcta, con retroalimentación por opción.",
+    "datos": [
+      "El enunciado.",
+      "Las opciones.",
+      "Cuál es la correcta.",
+      "La retroalimentación de la correcta y de las incorrectas."
+    ],
+    "antes": [
+      "Actividad saberes previos, Actividad didáctica cuestionario, quiz"
+    ]
+  },
+  {
+    "code": "P10",
+    "name": "Emparejamiento por arrastre",
+    "tech": "quiz-matching",
+    "cat": "Actividades",
+    "usa": "Unir con el mouse cada concepto con su definición (arrastrar y soltar).",
+    "datos": [
+      "Los pares: concepto ↔ definición.",
+      "El mensaje final al completar la actividad."
+    ],
+    "antes": [
+      "Actividad Emparejamiento, Actividad voltear tarjetas, voltear y emparejar"
+    ]
+  },
+  {
+    "code": "P11",
+    "name": "Controles deslizantes",
+    "tech": "slider-input",
+    "cat": "Actividades",
+    "usa": "Barras que el estudiante arrastra para explorar rangos o valores.",
+    "datos": [
+      "Qué se explora con cada control.",
+      "El rango de valores y qué se muestra al moverlo."
+    ],
+    "antes": [
+      "controles deslizantes, slider"
+    ]
+  },
+  {
+    "code": "P12",
+    "name": "Panel con scroll interno",
+    "tech": "scroll-panel",
+    "cat": "Contenido",
+    "usa": "Texto largo que se lee con scroll dentro de la misma pantalla, sin cambiar de hoja.",
+    "datos": [
+      "El texto completo."
+    ],
+    "antes": [
+      "área con scroll, introducción larga"
+    ]
+  },
+  {
+    "code": "P13",
+    "name": "Reproductor de video/audio",
+    "tech": "media-player",
+    "cat": "Multimedia",
+    "usa": "Un video o un audio con los controles de la marca.",
+    "datos": [
+      "El archivo de video o audio (por separado, no dentro del .pptx).",
+      "El título y el texto de acompañamiento."
+    ],
+    "antes": [
+      "Recurso audio, Recurso video, Insertar audio: …"
+    ]
+  },
+  {
+    "code": "P14",
+    "name": "Animación secuencial",
+    "tech": "sequential-anim",
+    "cat": "Contenido",
+    "usa": "Elementos que aparecen uno detrás del otro al entrar a la pantalla (ritmo de lectura).",
+    "datos": [
+      "El orden en que deben aparecer los elementos."
+    ],
+    "antes": [
+      "aparece la imagen…, animación de entrada"
+    ]
+  },
+  {
+    "code": "P15",
+    "name": "Pantalla de resultados",
+    "tech": "results-screen",
+    "cat": "Evaluación",
+    "usa": "Cierre de una actividad con puntaje, mensaje según el resultado y opción de reintentar.",
+    "datos": [
+      "El mensaje para cada rango de puntaje (bajo, medio, alto)."
+    ],
+    "antes": [
+      "diapositiva de resultados, reintento"
+    ]
+  },
+  {
+    "code": "P16",
+    "name": "Completar la frase",
+    "tech": "text-entry",
+    "cat": "Actividades",
+    "usa": "Frases o definiciones donde el estudiante escribe la palabra que falta.",
+    "datos": [
+      "Cada frase con la palabra que falta.",
+      "La respuesta válida de cada una."
+    ],
+    "antes": [
+      "completar, entrada de texto"
+    ]
+  },
+  {
+    "code": "P17",
+    "name": "Clasificar por arrastre",
+    "tech": "drag-to-category",
+    "cat": "Actividades",
+    "usa": "Arrastrar elementos a 2 o 3 contenedores (categorías).",
+    "datos": [
+      "Los elementos.",
+      "Los nombres de las categorías.",
+      "Dónde va cada elemento."
+    ],
+    "antes": [
+      "clasificar, arrastrar a categorías"
+    ]
+  },
+  {
+    "code": "P18",
+    "name": "Escenario de ramificación",
+    "tech": "branching-scenario",
+    "cat": "Evaluación",
+    "usa": "Una situación con decisiones: cada camino lleva a una consecuencia distinta.",
+    "datos": [
+      "La situación inicial.",
+      "Las decisiones posibles y a dónde lleva cada una.",
+      "El cierre de cada camino."
+    ],
+    "antes": [
+      "estudio de caso gamificado"
+    ]
+  },
+  {
+    "code": "P19",
+    "name": "Menú global",
+    "tech": "global-menu",
+    "cat": "Navegación",
+    "usa": "El menú de hamburguesa para saltar a cualquier pantalla de la unidad.",
+    "datos": [
+      "La lista de pantallas / subtemas en orden (sale del índice de la guía)."
+    ],
+    "antes": [
+      "menú de diapositivas"
+    ]
+  },
+  {
+    "code": "P20",
+    "name": "Glosario por tooltips",
+    "tech": "tooltip-glossary",
+    "cat": "Contenido",
+    "usa": "Términos dentro del texto que al pasar el mouse muestran su definición.",
+    "datos": [
+      "Término y definición de cada uno.",
+      "En qué texto aparece cada término."
+    ],
+    "antes": [
+      "glosario"
+    ]
+  },
+  {
+    "code": "P21",
+    "name": "Quiz sobre zonas de una imagen",
+    "tech": "image-hotspot-quiz",
+    "cat": "Evaluación",
+    "usa": "Preguntas donde hay que hacer clic en la zona correcta de una imagen.",
+    "datos": [
+      "La imagen.",
+      "Las zonas correctas.",
+      "Las preguntas."
+    ],
+    "antes": [
+      "señala en la imagen"
+    ]
+  },
+  {
+    "code": "P22",
+    "name": "Libro interactivo",
+    "tech": "flippingbook",
+    "cat": "Contenido",
+    "usa": "Un mazo de páginas que se pasan con flechas: para textos más largos que una tarjeta.",
+    "datos": [
+      "Título de cada página.",
+      "Texto de cada página."
+    ],
+    "antes": [
+      "flippingbook, libro"
+    ]
+  },
+  {
+    "code": "P23",
+    "name": "Scroll continuo tipo Rise",
+    "tech": "rise-scroll",
+    "cat": "Contenido",
+    "usa": "La página interactiva completa: bloques que se apilan y el estudiante baja con scroll.",
+    "datos": [
+      "Los bloques en orden (título, texto y media de cada uno)."
+    ],
+    "antes": [
+      "Recurso Página interactiva (rise)"
+    ]
+  },
+  {
+    "code": "P24",
+    "name": "Sopa de letras",
+    "tech": "wordsearch",
+    "cat": "Actividades",
+    "usa": "Buscar palabras escondidas en una grilla, con la pista de cada palabra.",
+    "datos": [
+      "Las palabras.",
+      "La pista o definición de cada una."
+    ],
+    "antes": [
+      "sopa de letras"
+    ]
+  },
+  {
+    "code": "P25",
+    "name": "Retícula de tarjetas",
+    "tech": "grid-cards",
+    "cat": "Contenido",
+    "usa": "Tarjetas de contenido en grilla: título, texto corto y opcionalmente ícono.",
+    "datos": [
+      "Título de cada tarjeta.",
+      "Texto corto.",
+      "Ícono (opcional)."
+    ],
+    "antes": [
+      "recurso tarjetas, tarjetas de contenido"
+    ]
+  },
+  {
+    "code": "P26",
+    "name": "Estudio de caso",
+    "tech": "casestudy",
+    "cat": "Actividades",
+    "usa": "Un caso para leer y analizar, con preguntas de reflexión y un cierre.",
+    "datos": [
+      "El caso completo.",
+      "Las preguntas de reflexión.",
+      "El cierre o conclusión."
+    ],
+    "antes": [
+      "estudio de caso"
+    ]
+  },
+  {
+    "code": "P27",
+    "name": "Cierre de unidad",
+    "tech": "cierre-unidad",
+    "cat": "Contenido",
+    "usa": "La pantalla final: síntesis de la unidad y mensaje de despedida.",
+    "datos": [
+      "La síntesis y el mensaje de cierre."
+    ],
+    "antes": [
+      "Cierre de la unidad"
+    ]
+  },
+  {
+    "code": "P28",
+    "name": "Crucigrama",
+    "tech": "crucigrama",
+    "cat": "Actividades",
+    "usa": "Grilla real de crucigrama: pistas horizontales y verticales, se escribe y se comprueba.",
+    "datos": [
+      "Las palabras (sin tildes) y la pista de cada una.",
+      "Dónde empieza cada palabra: fila y columna, y si va horizontal o vertical."
+    ],
+    "antes": [
+      "Crucigrama, ACTIVIDAD CRUCUGRAMA"
+    ]
+  }
+]

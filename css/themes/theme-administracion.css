@@ -1,0 +1,32 @@
+/* ============================================================
+   CIDE DESIGN SYSTEM · Tema: Administracion (calido, corporativo)
+   TEMA: redeclara SOLO variables de color (sin estructura ni logica).
+   Enlazar DESPUES de tokens.css en el <head>.
+   Para un tema nuevo: copia este archivo y cambia los tonos (aditivo).
+   ============================================================ */
+:root{
+  --bg:#fbe9d7;
+  --bg-elevated:#ffffff;
+  --bg-strong:#ffffff;
+  --text-primary:#224a37;
+  --text-secondary:#1a1e16;
+    --text-muted:#544838;
+  --text-on-accent:#ffffff;
+  --brand:#224a37;
+  --accent:#9c7f51;
+  --accent-hover:#82683f;
+  --ok:#224a37;
+  --ok-bg:#e8f1dc;
+  --err:#b0412e;
+  --err-bg:#f6e3df;
+  --warn:#a07b00;
+  --warn-bg:#f9efd6;
+  --info:#2b6cb0;
+  --cat-1:#224a37;
+  --cat-2:#9c7f51;
+  --cat-3:#b0412e;
+  --cat-4:#7ab0d8;
+  --border:#dfd3c0;
+  --border-strong:#9c7f51;
+  --divider:#d7cdb9;
+}

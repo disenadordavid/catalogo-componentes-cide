@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escenario de ramificación · P18 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P18</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+  <style>
+    .branch-card{display:none}
+    .branch-card.show{display:block;animation:fadein .3s var(--ease)}
+    @keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .choice{display:block;width:100%;text-align:left;border:1px solid var(--border);background:var(--bg-strong);border-radius:var(--radius-m);padding:16px 18px;margin:10px 0;cursor:pointer;transition:all var(--t-fast) var(--ease);box-shadow:var(--sh-card)}
+    .choice:hover{border-color:var(--accent);transform:translateX(6px)}
+    .path-badge{display:inline-block;padding:4px 12px;border-radius:var(--radius-pill);font-size:.78rem;font-weight:700;letter-spacing:.06em;margin-bottom:8px}
+    .path-badge.buena{background:var(--ok-bg);color:var(--ok)}
+    .path-badge.moderada{background:var(--warn-bg);color:#8a7a1a}
+    .path-badge.riesgo{background:var(--err-bg);color:var(--err)}
+    .restart{margin-top:16px}
+  </style>
+  <p class="kicker">Preset P18 · branching-scenario</p>
+  <h2 style="margin:12px 0 6px">Escenario de ramificación</h2>
+  <p class="muted" style="margin-bottom:14px">Tu decisión determina el siguiente nodo del caso.</p>
+
+  <div class="branch-card show" data-node="inicio">
+    <h3>La gerente recibe una solicitud urgente de un cliente.</h3>
+    <button class="choice" data-goto="buena">Acuerdo inmediato con el cliente</button>
+    <button class="choice" data-goto="riesgo">Respondo sin consultar al comité</button>
+    <button class="choice" data-goto="moderada">Pido información al área técnica</button>
+  </div>
+
+  <div class="branch-card" data-node="buena">
+    <span class="path-badge buena">✓ Decisión sólida</span>
+    <h3>Concertaste con evidencia. Buen manejo del caso.</h3>
+    <button class="choice" data-goto="final">Continuar</button>
+  </div>
+
+  <div class="branch-card" data-node="moderada">
+    <span class="path-badge moderada">⚠ Decisión parcial</span>
+    <h3>Bien al pedir información, pero faltó comunicar el avance.</h3>
+    <button class="choice" data-goto="final">Continuar</button>
+  </div>
+
+  <div class="branch-card" data-node="riesgo">
+    <span class="path-badge riesgo">! Riesgo alto</span>
+    <h3>Actuar sin el comité viola el principio democrático.</h3>
+    <button class="choice" data-goto="final">Entendido</button>
+  </div>
+
+  <div class="branch-card" data-node="final">
+    <span class="path-badge buena" style="padding:10px 20px;font-size:.9rem">Caso completado — verás una conclusión en la unidad real.</span>
+    <button class="btn primary restart">Reiniciar ↺</button>
+  </div>
+  
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+<script>(()=>{
+ /* El nombre 'go' queda DENTRO de este cierre, nunca en window: P01 (nav-buttons) ya
+    define un 'go(d)' global con otra firma, y r11-slides.html un tercero. Con las dos
+    piezas en la misma página ganaba el último y una de las dos se rompía. */
+ const go=node=>{
+  const destino=document.querySelector('[data-node="'+node+'"]');
+  if(!destino) return;   /* antes: se ocultaban TODAS las tarjetas y luego tronaba en la nula */
+  document.querySelectorAll('.branch-card').forEach(c=>c.classList.remove('show'));
+  destino.classList.add('show');
+  /* Antes: window.scrollTo({top:0}) mandaba al tope del DOCUMENTO — en una unidad larga
+     el alumno perdía la actividad de vista. Ahora se desplaza la tarjeta que aparece. */
+  destino.scrollIntoView({block:'start',behavior:'smooth'});
+ };
+ document.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>go(b.dataset.goto)));
+ const reinicio=document.querySelector('.restart');
+ if(reinicio) reinicio.addEventListener('click',()=>go('inicio'));
+ const primera=document.querySelector('.branch-card.show');
+ if(primera) primera.scrollIntoView({block:'start',behavior:'smooth'});
+})();</script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P18'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

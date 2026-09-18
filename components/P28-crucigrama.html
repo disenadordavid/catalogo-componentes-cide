@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crucigrama · P28 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P28</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+  <style>
+    /* P28 crucigrama — grilla real con celdas numeradas, pistas y comprobación.
+       El PARSER del CSS de presets (scripts/gen_components_css.py) extrae este bloque
+       tal cual a su capa @layer cide-P28, así que todo va prefijado .cw-. */
+    /* flex + wrap: si la grilla no entra al lado de las pistas, las pistas bajan solas
+       (una grilla de 17 columnas mide 610px y no siempre hay lugar) */
+    .cw{--cw-cell:34px;display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start;margin:18px 0}
+    @media(max-width:760px){.cw{--cw-cell:26px}}
+    .cw-wrap{flex:1 1 620px;overflow-x:auto;padding:4px}
+    /* las columnas salen de --cw-cols (lo pone el markup con la grilla resuelta) */
+    .cw-grid{display:grid;gap:2px;margin:0 auto;grid-template-columns:repeat(var(--cw-cols,12),var(--cw-cell));grid-auto-rows:var(--cw-cell);justify-content:center}
+    .cw-cell{width:var(--cw-cell);height:var(--cw-cell);position:relative}
+    .cw-cell.is-black{background:transparent;border:0}
+    .cw-cell:not(.is-black){background:var(--bg-elevated);border:1px solid var(--border);border-radius:4px}
+    .cw-cell.sel{background:var(--ok-bg);border-color:var(--brand)}
+    .cw-cell.ok{background:var(--ok-bg);border-color:var(--ok)}
+    .cw-cell.bad{border-color:var(--err)}
+    .cw-num{position:absolute;top:1px;left:3px;font-size:.55rem;font-weight:700;color:var(--brand);line-height:1;pointer-events:none}
+    .cw-input{width:100%;height:100%;border:0;background:transparent;text-align:center;font-family:var(--ff-body);
+      font-size:1.05rem;font-weight:700;color:var(--text-primary);text-transform:uppercase;border-radius:4px}
+    .cw-input:focus{outline:2px solid var(--brand);outline-offset:-2px}
+    .cw-input.ok{color:var(--ok)}
+    .cw-input.bad{color:var(--err)}
+    .cw-clues{flex:1 1 240px;display:grid;gap:18px}
+    .cw-group h3{margin:0 0 8px;font-family:var(--ff-display-heavy);color:var(--brand);font-size:1rem}
+    .cw-clue{display:grid;grid-template-columns:26px 1fr;gap:8px;margin:0 0 10px;font-size:.9rem;line-height:1.5;
+      color:var(--text-secondary);cursor:pointer;border-radius:var(--radius-s);padding:4px 6px}
+    .cw-clue:hover{background:var(--ok-bg)}
+    .cw-clue.on{background:var(--ok-bg);box-shadow:inset 0 0 0 1px var(--brand)}
+    .cw-clue b{color:var(--brand)}
+    .cw-len{opacity:.75}
+    .cw-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+  </style>
+
+  <p class="kicker">Actividad · P28 · crucigrama</p>
+  <h1 style="margin:12px 0 6px">Crucigrama</h1>
+  <p class="muted" style="margin-bottom:20px;max-width:760px">Escribe la respuesta de cada definición. Las palabras se cruzan: cada letra compartida sirve para las dos.</p>
+
+  <div class="card">
+    <!-- MARKUP CANÓNICO P28
+         [data-cw]            contenedor de la actividad
+         .cw-grid             la grilla; `--cw-cols` en el style define las columnas
+         .cw-cell             celda (vacía = negra, con .is-black)
+         .cw-num              número de casillero (el que numera la guía)
+         .cw-input            el input de la letra; data-letra = la letra correcta;
+                              data-words = id(s) de palabra(s) — una celda de cruce
+                              lleva las dos, separadas por espacio
+         .cw-clue             pista; data-word (singular) = a qué palabra apunta
+         [data-cw-check]      botón Comprobar    [data-cw-clear]  botón Limpiar
+         .feedback            mensaje de avance/cierre
+         Todo lo mueve initCrucigrama() de cide.js. -->
+    <div class="cw" data-cw>
+      <div class="cw-wrap">
+        <div class="cw-grid" style="--cw-cols:9">
+          <!-- fila 0 -->
+          <div class="cw-cell"><span class="cw-num">1</span><input class="cw-input" data-letra="A" data-words="h1" maxlength="1" aria-label="Fila 1 columna 1"></div>
+          <div class="cw-cell"><input class="cw-input" data-letra="H" data-words="h1" maxlength="1" aria-label="Fila 1 columna 2"></div>
+          <div class="cw-cell"><input class="cw-input" data-letra="O" data-words="h1" maxlength="1" aria-label="Fila 1 columna 3"></div>
+          <div class="cw-cell"><input class="cw-input" data-letra="R" data-words="h1" maxlength="1" aria-label="Fila 1 columna 4"></div>
+          <div class="cw-cell"><input class="cw-input" data-letra="R" data-words="h1" maxlength="1" aria-label="Fila 1 columna 5"></div>
+          <div class="cw-cell"><input class="cw-input" data-letra="O" data-words="h1" maxlength="1" aria-label="Fila 1 columna 6"></div>
+          <div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div>
+          <!-- filas 1..7: la vertical del cruce -->
+          <div class="cw-cell"><input class="cw-input" data-letra="S" data-words="v1" maxlength="1" aria-label="Fila 2 columna 1"></div>
+          <div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div>
+          <div class="cw-cell"><input class="cw-input" data-letra="O" data-words="v1" maxlength="1" aria-label="Fila 3 columna 1"></div>
+          <div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div>
+          <div class="cw-cell"><input class="cw-input" data-letra="C" data-words="v1" maxlength="1" aria-label="Fila 4 columna 1"></div>
+          <div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div>
+          <div class="cw-cell"><input class="cw-input" data-letra="I" data-words="v1" maxlength="1" aria-label="Fila 5 columna 1"></div>
+          <div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div>
+          <div class="cw-cell"><input class="cw-input" data-letra="A" data-words="v1" maxlength="1" aria-label="Fila 6 columna 1"></div>
+          <div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div>
+          <div class="cw-cell"><input class="cw-input" data-letra="D" data-words="v1" maxlength="1" aria-label="Fila 7 columna 1"></div>
+          <div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div>
+          <div class="cw-cell"><input class="cw-input" data-letra="O" data-words="v1" maxlength="1" aria-label="Fila 8 columna 1"></div>
+          <div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div><div class="cw-cell is-black"></div>
+        </div>
+      </div>
+
+      <div class="cw-clues">
+        <div class="cw-group">
+          <h3>Horizontales</h3>
+          <p class="cw-clue" data-word="h1"><b>1.</b><span>Producto mediante el cual el asociado guarda recursos en una cooperativa autorizada. <span class="cw-len">(6 letras)</span></span></p>
+        </div>
+        <div class="cw-group">
+          <h3>Verticales</h3>
+          <p class="cw-clue" data-word="v1"><b>2.</b><span>Persona que adquiere derechos y asume deberes dentro de una cooperativa. <span class="cw-len">(8 letras)</span></span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cw-actions">
+      <button type="button" class="btn primary" data-cw-check>Comprobar</button>
+      <button type="button" class="btn" data-cw-clear>Limpiar</button>
+    </div>
+    <div class="feedback"></div>
+  </div>
+</main>
+<script src="../js/cide.js"></script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P28'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

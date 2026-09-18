@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emparejamiento · P10 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P10</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+  <style>
+    .zones{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+    .zone{min-height:120px;border:2px dashed var(--border);border-radius:var(--radius-m);padding:14px;background:var(--bg-elevated)}
+    .chip{display:inline-block;background:var(--bg-strong);border:1px solid var(--border);border-radius:var(--radius-pill);padding:8px 16px;margin:4px;cursor:grab;user-select:none;box-shadow:var(--sh-card)}
+    .chip.dragging{opacity:.4}
+    .chip.sel{outline:2px solid var(--brand);outline-offset:2px}
+    .zone.over{border-color:var(--accent);background:var(--ok-bg)}
+    .ok-chip{background:var(--brand);color:var(--text-on-accent);font-weight:700}
+    .bad-chip{background:var(--err-bg);border-color:var(--err)}
+  </style>
+  <p class="kicker">Preset P10 · quiz-matching</p>
+  <h2 style="margin:12px 0 6px">Arrastra cada concepto a su categoría</h2>
+  <p class="muted">Toma una tarjeta y suéltala en la zona correcta.</p>
+  <div style="margin:18px 0" id="pool">
+    <span class="chip" draggable="true" data-cat="valores">Solidaridad</span>
+    <span class="chip" draggable="true" data-cat="valores">Equidad</span>
+    <span class="chip" draggable="true" data-cat="principios">Control democrático</span>
+    <span class="chip" draggable="true" data-cat="principios">Adhesión voluntaria</span>
+  </div>
+  <div class="zones">
+    <div class="zone" data-zone="valores"><strong>VALORES</strong></div>
+    <div class="zone" data-zone="principios"><strong>PRINCIPIOS</strong></div>
+  </div>
+  <div class="feedback" id="fbm" style="margin-top:18px"></div>
+  
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+<script>
+/* P10 · quiz-matching — el comportamiento vive acá porque cide.js NO implementa
+   emparejamiento (0 referencias a .chip/.zone en la librería). Portado del patrón
+   ya establecido en cooperativismo-u1/index.html, que es la actividad realmente
+   publicada, con tres diferencias frente a la versión anterior del preset:
+     1. el chip se REPARENTA a la zona (antes solo cambiaba de color y se quedaba
+        en el pool, así que el alumno nunca veía su respuesta colocada);
+     2. NO se bloquea: se puede volver a mover (antes un drop incorrecto hacía
+        draggable=false y el chip quedaba inservible mientras el mensaje pedía
+        probar otra categoría);
+     3. hay alternativa al ratón: clic en el chip para seleccionar + clic en la
+        zona para colocarlo (el drag&drop de HTML5 no funciona en pantallas táctiles). */
+document.addEventListener('DOMContentLoaded',()=>{
+ const pool = document.getElementById('pool');
+ const chips = document.querySelectorAll('.chip');
+ const zones = document.querySelectorAll('.zone');
+ let sel = null;
+
+ chips.forEach(chip=>{
+  chip.addEventListener('dragstart',()=>{sel=chip;chip.classList.add('dragging')});
+  chip.addEventListener('dragend',()=>chip.classList.remove('dragging'));
+  chip.addEventListener('click',e=>{                 // vía táctil / sin arrastre
+   e.stopPropagation();                              // que el clic no llegue a la zona
+   chips.forEach(c=>c.classList.remove('sel'));
+   chip.classList.add('sel');
+   sel = chip;
+  });
+ });
+
+ zones.forEach(zone=>{
+  zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('over')});
+  zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
+  zone.addEventListener('drop',e=>{
+   e.preventDefault();zone.classList.remove('over');
+   if(sel)colocar(sel,zone);
+  });
+  zone.addEventListener('click',()=>{ if(sel)colocar(sel,zone); });
+ });
+
+ function colocar(chip,zone){
+  const ok = chip.dataset.cat===zone.dataset.zone;
+  const vuelveAlPool = chip.parentElement===zone;    // soltarlo donde ya estaba lo devuelve
+  (vuelveAlPool?pool:zone).appendChild(chip);
+  chip.classList.remove('sel','dragging','ok-chip','bad-chip');   // sin residuos: se puede corregir
+  const fb = document.getElementById('fbm');
+  if(vuelveAlPool){
+   if(fb){fb.textContent='';fb.className='feedback';}
+  }else{
+   chip.classList.add(ok?'ok-chip':'bad-chip');
+   if(fb){
+    fb.textContent = ok ? '¡Correcto! "'+chip.textContent+'" pertenece aquí.'
+                        : 'No es correcto: "'+chip.textContent+'" no pertenece a esta categoría.';
+    fb.className='feedback '+(ok?'ok':'no');
+   }
+  }
+  sel = null;
+ }
+});</script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P10'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

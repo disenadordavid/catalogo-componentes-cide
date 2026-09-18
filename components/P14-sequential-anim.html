@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animación secuencial · P14 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P14</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+  <style>
+    .seq{min-height:60vh;display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding-top:110px}
+    .step{opacity:0;transform:translateY(40px);padding:26px 30px;border:1px solid var(--border);border-radius:var(--radius-l);background:var(--bg-elevated);box-shadow:var(--sh-card)}
+  </style>
+  <div class="container seq" id="seqwrap">
+    <p class="kicker" style="width:100%">Preset P14 · sequential-anim — los elementos entran en secuencia al cargar</p>
+    <div class="step" data-s>1. Aparece</div>
+    <div class="step" data-s>2. Luego este</div>
+    <div class="step" data-s>3. Y este</div>
+    <div class="step" data-s>4. Finalmente</div>
+  </div>
+  
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{
+ const els=document.querySelectorAll('[data-s]');
+ /* No se pregunta por window.CIDE: si la página no carga cide.js esa expresión LANZA
+    (TypeError) y, como los .step nacen con opacity:0, el contenido queda invisible para
+    siempre. Se pregunta por GSAP, igual que hace cide.js internamente. Además se respeta
+    prefers-reduced-motion, que es lo que hace la regla [data-animate] de base.css. */
+ const menosMovimiento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(typeof gsap !== 'undefined' && !menosMovimiento){
+  gsap.to(els,{opacity:1,y:0,stagger:.25,duration:.7,ease:'power3.out',delay:.4});
+ }else{
+  els.forEach(e=>{e.style.opacity='1';e.style.transform='none'});
+ }
+});</script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P14'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

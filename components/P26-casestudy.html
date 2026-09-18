@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estudio de caso · P26 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style>
+  .casestudy-card{margin-bottom:14px}
+  .casestudy-card textarea{width:100%;min-height:80px;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-m);background:var(--bg-strong);color:var(--text-primary);font-family:var(--ff-body);resize:vertical;font-size:.95rem;transition:border-color var(--t-fast) var(--ease)}
+  .casestudy-card textarea:focus{border-color:var(--brand);outline:none;box-shadow:0 0 0 3px var(--ok-bg)}
+  .casestudy-card textarea:disabled{opacity:.6;cursor:not-allowed}
+  .casestudy-feedback{margin-left:auto;font-size:.9rem;font-weight:600}
+  .casestudy-cierre{display:none;margin-top:16px;padding:16px 20px;background:var(--ok-bg);border:1px solid var(--ok);border-radius:var(--radius-m);color:var(--ok);font-weight:600}
+  .casestudy-cierre.show{display:block}
+</style>
+</head>
+<body>
+
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P26</div></div>
+
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+  <p class="kicker">Actividad · P26 · casestudy</p>
+  <h1 style="margin:12px 0 6px">Estudio de caso</h1>
+  <p class="muted" style="margin-bottom:20px;max-width:760px">Lee el caso y responde las preguntas. Escribe tu respuesta y haz clic en "Guardar y continuar".</p>
+
+  <div class="card" style="font-style:italic;padding:16px 20px;background:var(--bg-strong);border-left:3px solid var(--brand);border-radius:var(--radius-s);margin:12px 0;font-size:1rem;line-height:1.6">
+    Contexto del caso placeholder. Reemplazar con el contenido real del estudio de caso.
+  </div>
+
+  <div class="casestudy-card card">
+    <p style="margin:0 0 10px"><strong>P1</strong> — Pregunta placeholder</p>
+    <textarea rows="3" placeholder="Escribe tu respuesta..." aria-label="Respuesta a la pregunta 1"></textarea>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+      <button class="btn primary casestudy-save">Guardar y continuar</button>
+      <span class="casestudy-feedback"></span>
+    </div>
+  </div>
+
+  <div class="casestudy-card card">
+    <p style="margin:0 0 10px"><strong>P2</strong> — Pregunta placeholder</p>
+    <textarea rows="3" placeholder="Escribe tu respuesta..." aria-label="Respuesta a la pregunta 2"></textarea>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+      <button class="btn primary casestudy-save">Guardar y continuar</button>
+      <span class="casestudy-feedback"></span>
+    </div>
+  </div>
+
+  <div class="casestudy-cierre">
+    ¡Estudio de caso completado! Has respondido todas las preguntas.
+  </div>
+
+</main>
+
+<script src="../js/cide.js"></script>
+<script>
+(function(){
+  /* La respuesta se guarda en el navegador (localStorage), una por pregunta: así el botón
+     "Guardar" guarda de verdad y el alumno no pierde lo que escribió si recarga la página
+     o vuelve más tarde. Al volver, la respuesta se repone y el campo queda como guardado.
+     Después de guardar, el botón pasa a "Editar respuesta" para que se pueda corregir: si no,
+     al persistir la respuesta el alumno que guarda por error queda bloqueado sin salida.
+     También se emite 'casestudy:save' en el documento (mismo patrón de hook que P23 usa con
+     'rise:block'), para que un curso pueda mandar la respuesta a donde corresponda. */
+  const cards = [].slice.call(document.querySelectorAll('.casestudy-card'));
+  /* Estado por pregunta. No alcanza mirar `btn.disabled`, porque tras guardar el botón queda
+     activo como "Editar respuesta". */
+  const estados = cards.map(() => false);
+
+  const guardar = (clave, valor) => { try { localStorage.setItem(clave, valor); } catch (e) {} };
+  const leer = (clave) => { try { return localStorage.getItem(clave); } catch (e) { return null; } };
+
+  /* El cierre aparece cuando TODAS las preguntas están guardadas. */
+  const revisarCierre = () => {
+    const cierre = document.querySelector('.casestudy-cierre');
+    if (cierre) cierre.classList.toggle('show', estados.length > 0 && estados.every(Boolean));
+  };
+
+  cards.forEach((card, i) => {
+    const btn = card.querySelector('.casestudy-save');
+    const textarea = card.querySelector('textarea');
+    const fb = card.querySelector('.casestudy-feedback');
+    /* Clave estable: ruta de la página + número de pregunta (el índice es global, así que
+       dos estudios de caso en la misma página no se pisan). */
+    const clave = location.pathname + '::casestudy::' + i;
+
+    /* Dibuja los dos estados posibles de la tarjeta y recalcula el cierre. */
+    const pintar = () => {
+      if (estados[i]) {
+        textarea.disabled = true;
+        btn.textContent = 'Editar respuesta';
+        fb.textContent = '✓ Guardado';
+        fb.style.color = 'var(--ok)';
+      } else {
+        textarea.disabled = false;
+        btn.textContent = 'Guardar y continuar';
+      }
+      btn.disabled = false;
+      revisarCierre();
+    };
+
+    /* ¿Ya había una respuesta guardada de antes? Se repone. */
+    const previa = leer(clave);
+    if (previa !== null && previa.trim().length >= 10) {
+      textarea.value = previa;
+      estados[i] = true;
+    }
+    pintar();
+
+    btn.addEventListener('click', () => {
+      /* "Editar respuesta": desbloquea sin borrar lo guardado (si sale sin guardar, la
+         respuesta anterior sigue estando). */
+      if (estados[i]) {
+        estados[i] = false;
+        fb.textContent = '';
+        pintar();
+        textarea.focus();
+        return;
+      }
+      const valor = textarea.value.trim();
+      if (valor.length < 10) {
+        fb.textContent = 'Escribe una respuesta más completa (mínimo 10 caracteres)';
+        fb.style.color = 'var(--err)';
+        return;
+      }
+      guardar(clave, valor);
+      estados[i] = true;
+      pintar();
+      document.dispatchEvent(new CustomEvent('casestudy:save', {
+        detail: { pregunta: i + 1, clave: clave, respuesta: valor }
+      }));
+    });
+  });
+})();
+</script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P26'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

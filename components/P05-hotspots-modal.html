@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puntos calientes · P05 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P05</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+  <style>
+    .scene{position:relative;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-l);min-height:340px;box-shadow:var(--sh-card);overflow:hidden}
+    .hotspot{position:absolute;width:34px;height:34px;border-radius:50%;background:var(--accent);border:3px solid var(--bg-strong);cursor:pointer;z-index:var(--z-dropdown);transition:transform var(--t-fast) var(--ease);box-shadow:0 4px 12px rgba(34,74,55,.2)}
+    .hotspot:hover{transform:scale(1.15)}
+    /* El anillo se dibujaba con un ::after de inset:-8px + scale(1.6): el área de clic del
+       pseudo-elemento se estiraba 8px sobre los vecinos y le ROBABA el clic al botón
+       «Siguiente» de la hoja (medido con elementsFromPoint: devolvía los 4 puntos del
+       Decreto 962 y recién después el botón). El mismo latido, sin agrandar el área de
+       clic: un box-shadow que se expande (la sombra no entra en el hit-test del elemento). */
+    .hotspot{animation:pulse 2s infinite}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 var(--accent)}100%{box-shadow:0 0 0 16px transparent}}
+  </style>
+  <p class="kicker">Preset P05 · hotspots-modal</p>
+  <h2 style="margin:12px 0 6px">Puntos calientes</h2>
+  <p class="muted" style="margin-bottom:14px">Toca los puntos para abrir información en modal.</p>
+  <div class="scene">
+    <div class="hotspot" style="top:24%;left:30%" data-title="Punto A" data-text="Contenido literal de la diseñadora para el punto A."></div>
+    <div class="hotspot" style="top:58%;left:62%" data-title="Punto B" data-text="Contenido literal de la diseñadora para el punto B."></div>
+    <div class="hotspot" style="top:74%;left:22%" data-title="Punto C" data-text="Contenido literal de la diseñadora para el punto C."></div>
+  </div>
+  
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P05'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

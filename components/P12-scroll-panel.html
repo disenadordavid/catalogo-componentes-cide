@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scroll interno · P12 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P12</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+  <style>
+    .scroll-box{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-l);padding:24px;height:280px;overflow-y:auto;box-shadow:var(--sh-card)}
+    .scroll-box::-webkit-scrollbar{width:10px}
+    .scroll-box::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
+  </style>
+  <p class="kicker">Preset P12 · scroll-panel</p>
+  <h2 style="margin:12px 0 6px">Panel con scroll interno</h2>
+  <p class="muted" style="margin-bottom:14px">Contenido largo sin salir de la pantalla.</p>
+  <div class="scroll-box">
+    <h3>Sección A</h3><p class="muted">Contenido literal extenso de la diseñadora. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent volutpat sapien a lorem blandit, at aliquam urna mollis.</p>
+    <h3 style="margin-top:18px">Sección B</h3><p class="muted">Más contenido literal. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+    <h3 style="margin-top:18px">Sección C</h3><p class="muted">Más contenido. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    <h3 style="margin-top:18px">Sección D</h3><p class="muted">Cierre del contenido literal de la diseñadora para este panel.</p>
+  </div>
+  
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P12'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

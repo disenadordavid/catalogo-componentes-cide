@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz selección única · P09 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P09</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+  <style>
+    .q-opt{display:block;width:100%;text-align:left;border:1px solid var(--border);background:var(--bg-strong);border-radius:var(--radius-m);padding:16px 20px;margin:10px 0;cursor:pointer;transition:all var(--t-fast) var(--ease)}
+    .q-opt:hover{border-color:var(--accent);transform:translateX(4px);box-shadow:var(--sh-card)}
+    .q-opt.correct{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);font-weight:700}
+    .q-opt.wrong{border-color:var(--err);background:var(--err-bg);color:var(--err)}
+  </style>
+  <p class="kicker">Preset P09 · quiz-mcq</p>
+  <h2 style="margin:12px 0 6px">Pregunta de selección única</h2>
+  <p class="muted" style="margin-bottom:14px">Cada opción con retroalimentación literal de la diseñadora.</p>
+  <div class="q">
+    <h3>¿Cuál es el primer principio cooperativo?</h3>
+    <button class="q-opt" data-ok="0" data-msg="Adhesión voluntaria es el 1.º, pero esta no es la respuesta correcta.">Membresía abierta</button>
+    <button class="q-opt" data-ok="1" data-msg="¡Correcto! Adhesión y retiro voluntario es el primer principio.">Adhesión y retiro voluntario</button>
+    <button class="q-opt" data-ok="0" data-msg="Control democrático es el 2.º principio.">Control democrático</button>
+    <div class="feedback"></div>
+  </div>
+  
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P09'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

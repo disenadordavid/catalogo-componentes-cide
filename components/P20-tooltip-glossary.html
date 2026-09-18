@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glosario / tooltips · P20 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P20</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+  <style>
+    .gterm{color:var(--brand);font-weight:700;border-bottom:2px dotted var(--accent);cursor:pointer;position:relative;transition:background var(--t-fast) var(--ease)}
+    .gterm:hover,.gterm:focus{background:var(--ok-bg)}
+    .gterm::after{content:'?';display:inline-block;font-size:.62rem;background:var(--accent);color:var(--text-secondary);border-radius:50%;width:14px;height:14px;line-height:14px;text-align:center;margin-left:5px;vertical-align:super}
+    .tip{position:absolute;bottom:130%;left:0;z-index:var(--z-dropdown);width:230px;background:var(--bg-strong);border:1px solid var(--border);border-radius:var(--radius-m);padding:12px 14px;box-shadow:var(--sh-elevated);font-size:.85rem;line-height:1.5;color:var(--text-primary);opacity:0;pointer-events:none;transform:translateY(6px);transition:all var(--t-fast) var(--ease)}
+    .gterm:hover .tip,.gterm:focus .tip{opacity:1;pointer-events:auto;transform:none}
+    .gterm .tip b{color:var(--brand);display:block;margin-bottom:3px}
+  </style>
+  <p class="kicker">Preset P20 · tooltip-glossary</p>
+  <h2 style="margin:12px 0 6px">Glosario por tooltips</h2>
+  <p class="muted" style="margin-bottom:14px">Pasa el cursor (o toca) un término subrayado para ver su definición.</p>
+  <div class="card" style="font-size:1.05rem;line-height:2.4">
+    <p>En el modelo cooperativo, la <span class="gterm" tabindex="0">adhesión voluntaria<span class="tip"><b>Adhesión voluntaria</b>Acuerdo por el cual una persona decide libremente unirse a la cooperativa.</span></span> es un principio fundacional, junto con el <span class="gterm" tabindex="0">control democrático<span class="tip"><b>Control democrático</b>Cada socio tiene un voto, independientemente de su aporte.</span></span> y la <span class="gterm" tabindex="0">participación económica<span class="tip"><b>Participación económica</b>Aportación justa y distribución equitativa de los excedentes.</span></span>.</p>
+  </div>
+  
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P20'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

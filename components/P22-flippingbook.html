@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Libro interactivo · P22 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P22</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+  <style>
+    /* P22 flippingbook — libro de páginas con vista doble cara */
+    .book {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 30px auto;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .book-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      max-width: 720px;
+      width: 100%;
+      height: 420px;
+    }
+    /* Páginas base */
+    .page-left, .page-right {
+      flex: 0 0 50%;
+      padding: 32px 28px 32px 36px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      overflow-x: hidden;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      box-shadow: 0 4px 24px rgba(34,74,55,.06);
+    }
+    .page-left {
+      border-radius: var(--radius-l) 0 0 var(--radius-l);
+      border-right: none;
+      border-left: 8px solid var(--brand);
+    }
+    .page-right {
+      border-radius: 0 var(--radius-l) var(--radius-l) 0;
+      border-left: 4px solid var(--brand);
+      padding-left: 28px;
+      padding-right: 36px;
+    }
+    /* Voltea-hoja que cubre la página derecha y rota */
+    .flip-sheet {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+      z-index: 10;
+    }
+    .flip-sheet.flipped {
+      transform: rotateY(-180deg);
+    }
+    .flip-sheet-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 28px 32px 36px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--brand);
+      border-radius: 0 var(--radius-l) var(--radius-l) 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    .flip-sheet-back {
+      transform: rotateY(180deg);
+      background: var(--bg-strong);
+      border-radius: var(--radius-l) 0 0 var(--radius-l);
+      border-left: 1px solid var(--border);
+      border-right: 4px solid var(--brand);
+      padding-left: 36px;
+      padding-right: 28px;
+    }
+    /* Números de página — sticky: si la página scrollea (texto largo), el número queda a la
+       vista abajo en vez de irse con el texto. background:inherit copia el fondo de la página
+       (elevado o fuerte según la cara) para que el texto no pase por detrás. */
+    .page-num {
+      position: sticky;
+      bottom: 0;
+      background: inherit;
+      margin-top: auto;
+      padding-top: 16px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    /* Controles */
+    .book-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .book-prev, .book-next { min-width: 90px; }
+    /* Responsive: apilar páginas en móvil */
+    @media (max-width: 640px) {
+      .book-container { height: auto; flex-direction: column; perspective: none; }
+      .page-left, .page-right {
+        flex: none;
+        border-radius: var(--radius-l);
+        border-left: 1px solid var(--border);
+        border-right: 1px solid var(--border);
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .page-left { border-bottom: none; border-radius: var(--radius-l) var(--radius-l) 0 0; }
+      .page-right { border-radius: 0 0 var(--radius-l) var(--radius-l); }
+      .flip-sheet { display: none !important; }
+      .book-prev, .book-next { min-width: 70px; }
+    }
+  </style>
+
+  <p class="kicker">Preset P22 · flippingbook</p>
+  <h2 style="margin:12px 0 6px">Libro interactivo</h2>
+  <p class="muted" style="margin-bottom:8px">Haz clic en el botón Siguiente para pasar la página, o Anterior para retroceder.</p>
+
+  <div class="book">
+    <div class="book-container">
+      <!-- Hoja izquierda (página par) -->
+      <div class="page-left" id="book-page-left">
+        <h3 style="margin-bottom:8px">Portada</h3>
+        <p class="muted">Título del libro interactivo. Contenido literal de la diseñadora.</p>
+        <div class="page-num">1</div>
+      </div>
+      <!-- Hoja derecha (página impar) — se revela al voltear -->
+      <div class="page-right" id="book-page-right">
+        <p class="muted" style="margin-bottom:6px">Interior portada</p>
+        <p>Texto literal de la diseñadora para el interior de la portada.</p>
+        <div class="page-num">2</div>
+      </div>
+      <!-- Hoja voladora: cubre la página derecha y rota al avanzar -->
+      <div class="flip-sheet" id="flip-sheet">
+        <div class="flip-sheet-face flip-sheet-front">
+          <p class="muted" style="margin-bottom:6px">Interior portada</p>
+          <p>Texto literal de la diseñadora para el interior de la portada.</p>
+          <div class="page-num">2</div>
+        </div>
+        <div class="flip-sheet-face flip-sheet-back">
+          <h3 style="margin-bottom:8px">Capítulo 1</h3>
+          <p>Contenido literal de la diseñadora para la página 3.</p>
+          <div class="page-num">3</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="book-controls">
+    <button class="btn book-prev" id="book-prev">← Anterior</button>
+    <button class="btn book-next" id="book-next">Siguiente →</button>
+  </div>
+
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+<script>(()=>{
+ /* P22 es autocontenido: las páginas del libro son datos de la diseñadora, así que viven ACÁ
+    y no en la librería. Para cargar el contenido real se edita el array PAGINAS y nada más.
+    El markup de arriba queda como respaldo sin JS (muestra la portada).
+    `data-fb-init` avisa a cide.js que este libro ya está inicializado, para que no lo pise. */
+ const ANIM_MS = 700;
+ const PAGINAS = [
+  { left:  { title:'Portada',           body:'Título del libro interactivo. Contenido literal de la diseñadora.', num:1 },
+    right: { title:'Interior portada',  body:'Texto literal de la diseñadora para el interior de la portada.',      num:2 } },
+  { left:  { title:'Capítulo 1',        body:'Contenido literal de la diseñadora para la página 3.',                num:3 },
+    right: { title:'Capítulo 1 (cont.)',body:'Continuación del capítulo 1. Texto literal de la diseñadora.',        num:4 } },
+  { left:  { title:'Capítulo 2',        body:'Contenido literal de la diseñadora para la página 5.',                num:5 },
+    right: { title:'Capítulo 2 (cont.)',body:'Continuación del capítulo 2. Texto literal de la diseñadora.',        num:6 } },
+  { left:  { title:'Capítulo 3',        body:'Contenido literal de la diseñadora para la página 7.',                num:7 },
+    right: { title:'Contraportada',     body:'Texto literal de la diseñadora para la contraportada del libro.',     num:8 } }
+ ];
+
+ document.querySelectorAll('.book').forEach(book=>{
+  if(book.dataset.fbInit) return;   /* el script no es idempotente: una 2ª copia no reengancha */
+  book.dataset.fbInit='1';
+
+  const leftEl  = book.querySelector('#book-page-left');
+  const rightEl = book.querySelector('#book-page-right');
+  const sheet   = book.querySelector('#flip-sheet');
+  const frontEl = sheet ? sheet.querySelector('.flip-sheet-front') : null;
+  const backEl  = sheet ? sheet.querySelector('.flip-sheet-back')  : null;
+  /* Los controles son HERMANOS de .book en el markup canónico, no hijos. */
+  const controls = (book.nextElementSibling && book.nextElementSibling.classList.contains('book-controls'))
+   ? book.nextElementSibling
+   : (book.parentElement ? book.parentElement.querySelector('.book-controls') : null);
+  const prevBtn = controls ? controls.querySelector('.book-prev') : null;
+  const nextBtn = controls ? controls.querySelector('.book-next') : null;
+
+  let current=0, isAnimating=false;
+
+  const pintar=(el,p)=>{ if(el) el.innerHTML='<h3 style="margin-bottom:8px">'+p.title+'</h3><p class="muted">'+p.body+'</p><div class="page-num">'+p.num+'</div>'; };
+  const updateButtons=()=>{
+   if(prevBtn) prevBtn.disabled = current<=0;
+   if(nextBtn) nextBtn.disabled = current>=PAGINAS.length-1;
+  };
+  const pintaTodo=()=>{
+   pintar(leftEl,PAGINAS[current].left);
+   pintar(rightEl,PAGINAS[current].right);
+   pintar(frontEl,PAGINAS[current].right);
+   pintar(backEl,PAGINAS[current+1]?PAGINAS[current+1].left:PAGINAS[current].left);
+  };
+
+  pintaTodo();
+  updateButtons();
+
+  const nextPage=()=>{
+   if(isAnimating || current>=PAGINAS.length-1) return;
+   isAnimating=true;
+   pintar(backEl,PAGINAS[current+1].left);   /* el reverso revela la nueva izquierda */
+   sheet.classList.add('flipped');
+   setTimeout(()=>{
+    current++;
+    pintaTodo();
+    sheet.classList.remove('flipped');
+    updateButtons();
+    isAnimating=false;
+   }, ANIM_MS);
+  };
+
+  const prevPage=()=>{
+   if(isAnimating || current<=0) return;
+   isAnimating=true;
+   pintar(backEl,PAGINAS[current].left);
+   pintar(frontEl,PAGINAS[current-1].right);
+   sheet.style.transition='none';            /* arranca volteado, sin animar */
+   sheet.classList.add('flipped');
+   void sheet.offsetWidth;
+   sheet.style.transition='';
+   sheet.classList.remove('flipped');
+   setTimeout(()=>{
+    current--;
+    pintaTodo();
+    updateButtons();
+    isAnimating=false;
+   }, ANIM_MS);
+  };
+
+  if(nextBtn) nextBtn.addEventListener('click',nextPage);
+  if(prevBtn) prevBtn.addEventListener('click',prevPage);
+ });
+})();</script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P22'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

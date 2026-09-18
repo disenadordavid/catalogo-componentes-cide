@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrada de texto · P16 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P16</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+  <style>
+    .blank{display:inline-block;min-width:140px;border-bottom:2px solid var(--brand);background:transparent;color:var(--text-primary);font-family:var(--ff-body);font-size:1rem;padding:4px 8px;text-align:center}
+    .blank:focus{outline:none;background:var(--ok-bg);border-radius:var(--radius-s)}
+    .blank.done{border-bottom-color:var(--ok);color:var(--ok);font-weight:700}
+    .blank.bad{border-bottom-color:var(--err);color:var(--err)}
+  </style>
+  <p class="kicker">Preset P16 · text-entry</p>
+  <h2 style="margin:12px 0 6px">Completa la frase</h2>
+  <p class="muted" style="margin-bottom:14px">Escribe la respuesta en el espacio y presiona Verificar.</p>
+  <div class="card" style="font-size:1.1rem;line-height:2.2">
+    El primer principio cooperativo es la adhesión <input class="blank" id="b1" data-ans="voluntaria" aria-label="Palabra que falta"> y abierta.
+  </div>
+  <div style="margin-top:18px;display:flex;gap:10px;align-items:center">
+    <button class="btn primary" onclick="check()">Verificar</button>
+    <button class="btn" onclick="reset()">Limpiar</button>
+    <div class="feedback" id="fbt" style="margin:0;margin-left:8px;display:inline-block;flex:1"></div>
+  </div>
+  
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+<script>function norm(s){return s.trim().toLowerCase().replace(/[.,¿?¡!]/g,'')}
+ function check(){
+  const inp=document.getElementById('b1');const fb=document.getElementById('fbt');
+  /* Se normalizan LOS DOS lados: la respuesta esperada también. Antes se comparaba
+     norm(alumno) === data-ans crudo, así que un data-ans="Voluntaria" (o con punto, o con
+     espacio final) marcaba como incorrecta toda respuesta correcta, en silencio. */
+  const ok=norm(inp.value)===norm(inp.dataset.ans);
+  inp.classList.remove('done','bad');inp.classList.add(ok?'done':'bad');
+  fb.textContent=ok?'¡Correcto! Término clave dominado.':'Revisa: la palabra correcta está relacionada con la pertenencia.';
+  fb.className='feedback '+(ok?'ok':'no');
+ }
+ function reset(){const i=document.getElementById('b1');i.value='';i.classList.remove('done','bad');document.getElementById('fbt').className='feedback';}
+ /* Enter verifica: es la tecla natural al terminar de escribir, sin tener que ir al botón. */
+ document.addEventListener('DOMContentLoaded',()=>{
+  const inp=document.getElementById('b1');
+  if(inp) inp.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); check(); } });
+ });</script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P16'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

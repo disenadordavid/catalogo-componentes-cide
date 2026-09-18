@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sopa de letras · P24 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style>
+  .wordsearch-grid{display:grid;gap:3px;width:100%;max-width:640px;margin:16px auto}
+  .wordsearch-cell{aspect-ratio:1;border:1px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:var(--ff-body);font-size:1rem;background:var(--bg-strong);color:var(--text-primary);cursor:pointer;transition:all .15s;user-select:none}
+  .wordsearch-cell:hover{border-color:var(--accent)}
+  .wordsearch-cell.found{background:var(--ok-bg);color:var(--ok);border-color:var(--ok);font-weight:700}
+  .wordsearch-words{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+  .wordsearch-chip{padding:4px 10px;border:1px solid var(--border);border-radius:20px;background:var(--bg-strong);font-size:.85rem;color:var(--text-secondary);transition:all .3s}
+  .wordsearch-chip.found{background:var(--ok-bg);color:var(--ok);border-color:var(--ok);text-decoration:line-through;font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P24</div></div>
+
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+  <p class="kicker">Actividad · P24 · wordsearch</p>
+  <h1 style="margin:12px 0 6px">Sopa de letras</h1>
+  <p class="muted" style="margin-bottom:20px;max-width:760px">Encuentra las palabras en la sopa de letras. Haz clic en cada celda para marcarla.</p>
+
+  <div class="card">
+    <!-- Las palabras se configuran ACÁ, en data-words (separadas por coma).
+         data-size es opcional: si falta, la rejilla se dimensiona sola según la palabra más larga.
+         Todo el comportamiento (rejilla, marcado, contador, Reiniciar, Mostrar solución) lo maneja
+         initWordsearch de cide.js, que lee estos atributos. -->
+    <div class="wordsearch-words" id="words-list"></div>
+    <div class="wordsearch-grid" id="word-grid" data-words="EJEMPLO,PALABRA,SISTEMA,DISENO,CURSO"></div>
+    <p style="text-align:center;margin-top:14px;color:var(--text-secondary);font-size:.9rem">
+      Palabras encontradas: <span id="found-count">0</span> / <span id="total-words">0</span>
+    </p>
+    <div style="text-align:center;margin-top:12px">
+      <button class="btn" id="reset-btn">Reiniciar</button>
+      <button class="btn" id="solution-btn">Mostrar solución</button>
+    </div>
+  </div>
+
+</main>
+
+<script src="../js/cide.js"></script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P24'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

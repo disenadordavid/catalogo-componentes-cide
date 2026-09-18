@@ -1,0 +1,78 @@
+/* ============================================================
+   CIDE DESIGN SYSTEM · Tokens (GENERADO desde tokens.json — no editar a mano)
+   v2.0.0 — Light mode institucional CIDE
+   ============================================================ */
+@font-face{font-family:'Mundial';src:url('../fonts/MundialRegular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Mundial';src:url('../fonts/MundialBold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Trivia C6';src:url('../fonts/Storm - Trivia Gothic C6 Condensed Black.otf') format('opentype');font-display:swap}
+@font-face{font-family:'Trivia C3 Heavy';src:url('../fonts/Storm - Trivia Gothic C3 Condensed Heavy.otf') format('opentype');font-display:swap}
+
+:root{
+  /* ---- color: fondos (jerarquía 0→2) ---- */
+  --bg:#dae9c8;                   /* Fondo principal LIMPIO - verde claro institucional */
+  --bg-elevated:#fbe9d7;          /* Tarjetas, paneles, modales - crema */
+  --bg-strong:#ffffff;            /* Blanco puro para inputs, áreas de escritura */
+
+  /* ---- color: texto ---- */
+  --text-primary:#224a37;         /* Texto principal - verde oscuro institucional */
+  --text-secondary:#1a1e16;       /* Texto énfasis máximo - charcoal */
+  --text-muted:#5a6b55;           /* Texto secundario - derivado */
+  --text-on-accent:#ffffff;       /* Texto sobre colores fuertes */
+
+  /* ---- color: marca y acentos ---- */
+  --brand:#224a37;                /* Color de marca = verde oscuro */
+  --accent:#f7b39f;               /* Acento interactivo - melocotón */
+  --accent-hover:#ec9a7a;         /* Hover del acento */
+
+  /* ---- color: semánticos (evaluación/estado — independientes de categorías) ---- */
+  --ok:var(--brand);              /* Éxito = verde oscuro (coherente con marca) */
+  --ok-bg:#e8f3dd;                /* Fondo éxito (10% brand) */
+  --err:#ec6450;                  /* Error = coral institucional */
+  --err-bg:#fdeae8;               /* Fondo error */
+  --warn:#efec95;                 /* Advertencia = amarillo suave */
+  --warn-bg:#fef9e7;              /* Fondo advertencia */
+  --info:#7ab0d8;                 /* Info = azul derivado (neutral) */
+
+  /* ---- color: categorías de contenido (intercambiables por curso) ---- */
+  --cat-1:#224a37;                /* Categoría 1 = brand */
+  --cat-2:#ec6450;                /* Categoría 2 = coral */
+  --cat-3:#9c7f51;                /* Categoría 3 = marrón medio */
+  --cat-4:#7ab0d8;                /* Categoría 4 = azul */
+
+  /* ---- color: bordes y divisores ---- */
+  --border:#c4d5b8;               /* Borde sutil (20% brand sobre bg) */
+  --border-strong:#224a37;        /* Borde enfocado */
+  --divider:#d3d3d3;              /* Divisor gris institucional */
+
+  /* ---- font ---- */
+  --ff-body:'Mundial', system-ui, -apple-system, sans-serif;
+  --ff-display:'Trivia C6', 'Trivia Gothic', Impact, sans-serif;
+  --ff-display-heavy:'Trivia C3 Heavy', 'Trivia Gothic', Impact, sans-serif;
+
+  /* ---- fontSize ---- */
+  --fs-kicker:.72rem; --fs-body:1rem; --fs-lead:1.05rem;
+  --fs-h3:1.35rem; --fs-h2:clamp(1.8rem, 4vw, 2.6rem);
+  --fs-h1:clamp(2.4rem, 6vw, 4.2rem); --fs-display:clamp(3rem, 8vw, 6.5rem);
+
+  /* ---- space ---- */
+  --sp-1:6px; --sp-2:10px; --sp-3:16px; --sp-4:22px; --sp-5:30px; --sp-6:40px; --sp-9:90px;
+
+  /* ---- radius ---- */
+  --radius-s:10px; --radius-m:14px; --radius-l:22px; --radius-pill:999px;
+
+  /* ---- shadow (sutiles, light mode) ---- */
+  --sh-card:0 2px 8px rgba(34,74,55,.08), 0 8px 24px rgba(34,74,55,.06);
+  --sh-elevated:0 12px 40px rgba(34,74,55,.12);
+  --sh-modal:0 24px 64px rgba(34,74,55,.15);
+
+  /* ---- z-index (escala por bandas) ---- */
+  --z-base:0; --z-dropdown:100; --z-sticky:200; --z-overlay:300;
+
+  /* ---- motion ---- */
+  --t-fast:.22s; --t-slow:.5s; --ease:cubic-bezier(.2,.8,.2,1);
+}
+
+/* ---- breakpoints oficiales ----
+   sm: 640px  → móvil grande / colapso de grids a 1 columna
+   md: 820px  → tablet / layouts de 2 columnas → apilados
+   lg: 1100px → desktop / contenedor máximo                    */

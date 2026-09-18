@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cierre de unidad · P27 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style>
+  .cierre-box{background:linear-gradient(135deg,var(--ok-bg),transparent);border:1px solid var(--ok);border-radius:var(--radius-l);padding:26px;margin:18px 0}
+  .cierre-box .kicker{color:var(--ok);margin-bottom:6px}
+  .cierre-box p{font-size:1.1rem;line-height:1.7}
+  .cierre-repaso{margin-top:16px;padding:16px 20px;background:var(--bg-strong);border-left:3px solid var(--brand);border-radius:var(--radius-s);font-size:1rem;line-height:1.7;color:var(--text-secondary)}
+  .cierre-repaso strong{display:block;color:var(--text-primary);margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P27</div></div>
+
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+  <p class="kicker">Cierre · P27 · cierre-unidad</p>
+  <h1 style="margin:12px 0 6px">Has completado la unidad</h1>
+
+  <div class="cierre-box">
+    <p class="kicker">Unidad completada</p>
+    <p>¡Felicitaciones! Has finalizado la unidad. Has aprendido conceptos fundamentales que te permiten comprender el impacto social del modelo en las comunidades.</p>
+  </div>
+
+  <div class="cierre-repaso">
+    <strong>Repaso rápido</strong>
+    A lo largo de la unidad reconociste los temas fundamentales del cooperativismo. Estos aprendizajes te permiten comprender el cooperativismo como una forma de construir colectivamente nuevas oportunidades.
+  </div>
+
+</main>
+
+<script src="../js/cide.js"></script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P27'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

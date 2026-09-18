@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise scroll · P23 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P23</div></div>
+<div class="rise-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-rise-progress>
+  <div class="rise-progress-fill"></div>
+</div>
+<main class="container rise-flow" style="padding-top:130px;padding-bottom:80px">
+
+  <style>
+    .rise-flow{position:relative}
+    .rise-progress{position:fixed;top:0;left:0;right:0;height:4px;background:var(--border);z-index:var(--z-sticky)}
+    .rise-progress-fill{height:100%;width:0;background:var(--brand);transition:width var(--t-slow) var(--ease)}
+
+    .rise-section{
+      padding:var(--sp-6) var(--sp-5);
+      margin-bottom:var(--sp-5);
+      background:var(--bg-elevated);
+      border:1px solid var(--border);
+      border-left:4px solid transparent;
+      border-radius:var(--radius-l);
+      box-shadow:var(--sh-card);
+      transition:border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+    }
+    .rise-section[data-complete="1"]{
+      border-left-color:var(--ok);
+      box-shadow:var(--sh-elevated);
+    }
+
+    .rise-grid-2col{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-5);align-items:center}
+    .rise-grid-reverse .rise-img{order:2}
+    @media(max-width:820px){.rise-grid-2col{grid-template-columns:1fr}.rise-grid-reverse .rise-img{order:0}}
+
+    .rise-img{
+      background:linear-gradient(135deg,var(--bg-strong),var(--border));
+      border-radius:var(--radius-m);
+      min-height:180px;
+      display:flex;align-items:center;justify-content:center;
+      color:var(--text-muted);font-weight:700;letter-spacing:.1em;font-size:.85rem;
+      border:1px solid var(--border);
+    }
+
+    .rise-list{list-style:none;padding:0}
+    .rise-list li{
+      padding:12px 0 12px 32px;
+      border-bottom:1px solid var(--border);
+      position:relative;
+    }
+    .rise-list li:last-child{border-bottom:0}
+    .rise-list li::before{
+      content:"→";
+      position:absolute;left:0;top:12px;
+      color:var(--accent);font-weight:700;
+    }
+
+    .rise-steps{display:flex;flex-direction:column;gap:var(--sp-4)}
+    .rise-step{display:flex;gap:var(--sp-4);align-items:flex-start}
+    .rise-num{
+      flex-shrink:0;width:44px;height:44px;border-radius:50%;
+      background:var(--brand);color:var(--text-on-accent);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:1.1rem;
+    }
+
+    .rise-quote{
+      margin:0;padding:var(--sp-5);
+      background:var(--bg-strong);
+      border-left:4px solid var(--accent);
+      border-radius:var(--radius-m);
+      font-size:var(--fs-lead);
+      line-height:1.6;
+    }
+    .rise-quote p{font-style:italic;color:var(--text-primary)}
+    .rise-quote cite{display:block;margin-top:var(--sp-3);font-size:var(--fs-kicker);color:var(--text-muted);font-style:normal}
+
+    /* ---- Reutiliza markup canónico P08 (sin onclick inline; cide.js maneja .acc-head) ---- */
+    .acc-item{border:1px solid var(--border);border-radius:var(--radius-m);margin-bottom:10px;background:var(--bg-strong);overflow:hidden}
+    .acc-head{width:100%;text-align:left;background:none;border:0;padding:18px 22px;font-size:1rem;font-weight:700;color:var(--text-primary);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .acc-head:hover{color:var(--brand)}
+    .acc-head .chev{transition:transform var(--t-fast) var(--ease)}
+    .acc-item.open .chev{transform:rotate(180deg)}
+    .acc-body{max-height:0;overflow:hidden;transition:max-height var(--t-slow) var(--ease)}
+    .acc-body-inner{padding:0 22px 20px}
+
+    /* ---- Quiz P09 vía CIDE.quiz() ---- */
+    [data-rise-quiz] .opt{display:block;width:100%;text-align:left;border:1px solid var(--border);background:var(--bg-strong);border-radius:var(--radius-m);padding:16px 20px;margin:10px 0;cursor:pointer;transition:all var(--t-fast) var(--ease)}
+    [data-rise-quiz] .opt:hover{border-color:var(--accent);transform:translateX(4px);box-shadow:var(--sh-card)}
+    [data-rise-quiz] .opt.correct{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);font-weight:700}
+    [data-rise-quiz] .opt.wrong{border-color:var(--err);background:var(--err-bg);color:var(--err)}
+  </style>
+
+  <!-- Bloque 1: Intro kicker + display -->
+  <section class="rise-section" data-rise-block="1">
+    <p class="kicker">Unidad de ejemplo · Bloque 1</p>
+    <h1 class="display" style="margin-top:10px">Contenido <em>continuo</em></h1>
+    <p class="muted" style="margin-top:14px;font-size:var(--fs-lead)">Subtítulo literal de la diseñadora para el bloque de introducción del contenido tipo Rise. El estudiante consume haciendo scroll vertical.</p>
+  </section>
+
+  <!-- Bloque 2: Párrafo con imagen -->
+  <section class="rise-section" data-rise-block="2">
+    <h2 style="margin-bottom:12px">Párrafo con imagen</h2>
+    <div class="rise-grid-2col">
+      <p class="muted">Contenido literal de la diseñadora para el párrafo que acompaña la imagen en el bloque Rise. Texto placeholder que explica el concepto visual del bloque.</p>
+      <div class="rise-img" role="img" aria-label="Imagen placeholder del bloque 2">Imagen</div>
+    </div>
+  </section>
+
+  <!-- Bloque 3: Lista -->
+  <section class="rise-section" data-rise-block="3">
+    <h2 style="margin-bottom:12px">Lista de contenido</h2>
+    <ul class="rise-list">
+      <li>Primer elemento de la lista literal de la diseñadora.</li>
+      <li>Segundo elemento con texto placeholder del curso.</li>
+      <li>Tercer elemento — contenido extenso del bloque Rise.</li>
+    </ul>
+  </section>
+
+  <!-- Bloque 4: Dos columnas (texto + imagen, invierte orden) -->
+  <section class="rise-section" data-rise-block="4">
+    <div class="rise-grid-2col rise-grid-reverse">
+      <div class="rise-img" role="img" aria-label="Imagen placeholder del bloque 4">Imagen</div>
+      <div>
+        <h2 style="margin-bottom:12px">Dos columnas</h2>
+        <p class="muted">Texto literal de la diseñadora en la columna derecha. El layout colapsa a una columna en breakpoint md (820px) del design system.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bloque 5: Numeración / pasos -->
+  <section class="rise-section" data-rise-block="5">
+    <h2 style="margin-bottom:16px">Pasos del proceso</h2>
+    <div class="rise-steps">
+      <div class="rise-step"><div class="rise-num">1</div><div><strong>Paso uno</strong><p class="muted">Descripción literal del primer paso del proceso.</p></div></div>
+      <div class="rise-step"><div class="rise-num">2</div><div><strong>Paso dos</strong><p class="muted">Descripción literal del segundo paso del proceso.</p></div></div>
+      <div class="rise-step"><div class="rise-num">3</div><div><strong>Paso tres</strong><p class="muted">Descripción literal del tercer paso del proceso.</p></div></div>
+    </div>
+  </section>
+
+  <!-- Bloque 6: Cita destacada -->
+  <section class="rise-section" data-rise-block="6">
+    <blockquote class="rise-quote">
+      <p>"Cita destacada literal de la diseñadora para el bloque de contenido Rise del curso."</p>
+      <cite>— Autor del curso, <em>página X</em></cite>
+    </blockquote>
+  </section>
+
+  <!-- Bloque 7: Acordeón (markup P08, sin onclick inline) -->
+  <section class="rise-section" data-rise-block="7">
+    <h2 style="margin-bottom:12px">Preguntas frecuentes</h2>
+    <div class="acc-item">
+      <button class="acc-head">Pregunta frecuente 1 <span class="chev">▾</span></button>
+      <div class="acc-body"><div class="acc-body-inner muted">Respuesta literal de la diseñadora para la primera pregunta frecuente del bloque.</div></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-head">Pregunta frecuente 2 <span class="chev">▾</span></button>
+      <div class="acc-body"><div class="acc-body-inner muted">Respuesta literal de la diseñadora para la segunda pregunta frecuente del bloque.</div></div>
+    </div>
+  </section>
+
+  <!-- Bloque 8: Quiz corto (P09 vía CIDE.quiz()) -->
+  <section class="rise-section" data-rise-block="8">
+    <h2 style="margin-bottom:12px">Comprobación rápida</h2>
+    <div data-rise-quiz></div>
+  </section>
+
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+<script>/* La comprobación del bloque la monta ESTA página, con la API documentada CIDE.quiz(mount, config):
+   la pregunta es contenido de la diseñadora, no de la librería. Editá el array de preguntas — es
+   lo único que hay que tocar. */
+CIDE.quiz(document.querySelector('[data-rise-quiz]'), [
+  { prompt: 'Pregunta literal de la diseñadora para la comprobación del bloque.', options: [
+    { text: 'Opción correcta literal de la diseñadora',   ok: true,  msg: '¡Correcto! Mensaje literal de la diseñadora.' },
+    { text: 'Opción incorrecta literal de la diseñadora', ok: false, msg: 'Mensaje de error literal de la diseñadora.' }
+  ]}
+], (score, total, scoreEl) => {
+  if (scoreEl) {
+    scoreEl.style.display = 'block';
+    scoreEl.innerHTML = '<strong>' + score + '/' + total + '</strong> — Comprobación completada.';
+  }
+});</script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P23'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menú global · P19 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style>
+  .hamb{position:fixed;right:26px;top:22px;z-index:var(--z-sticky);width:46px;height:46px;border-radius:50%;border:1px solid var(--border);background:var(--bg-strong);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;box-shadow:var(--sh-card);transition:all var(--t-fast) var(--ease)}
+  .hamb:hover{border-color:var(--accent);transform:rotate(90deg)}
+  .hamb span{display:block;width:18px;height:2px;background:var(--brand);border-radius:2px;transition:all var(--t-fast) var(--ease)}
+  .menu{position:fixed;top:0;right:-320px;visibility:hidden;width:300px;height:100vh;z-index:var(--z-overlay);background:var(--bg-elevated);border-left:1px solid var(--border);padding:90px 24px 24px;overflow-y:auto;overscroll-behavior:contain;transition:right var(--t-slow) var(--ease);box-shadow:var(--sh-modal)}
+  .menu.open{right:0;visibility:visible}
+  .menu a{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;border-radius:var(--radius-m);color:var(--text-primary);text-decoration:none;margin-bottom:4px;transition:background var(--t-fast) var(--ease)}
+  .menu a:hover{background:var(--ok-bg)}
+  .menu a.on{background:var(--brand);color:var(--text-on-accent);font-weight:700}
+  .menu a span.num{font-family:var(--ff-display-heavy);font-size:.8rem;opacity:.55}
+  .menu-backdrop{position:fixed;inset:0;z-index:calc(var(--z-overlay) - 1);background:rgba(26,30,22,.4);opacity:0;pointer-events:none;transition:opacity var(--t-fast) var(--ease)}
+  .menu-backdrop.show{opacity:1;pointer-events:auto}
+</style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P19</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+
+  <p class="kicker">Preset P19 · global-menu</p>
+  <h2 style="margin:12px 0 6px">Menú global (HUD hamburguesa)</h2>
+  <p class="muted">Usa el botón ☰ arriba a la derecha para saltar entre secciones.</p>
+
+  <button class="hamb" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+  <div class="menu-backdrop" id="mb"></div>
+  <nav class="menu" id="mnu">
+    <p class="kicker" style="margin-bottom:16px">SECCIONES</p>
+    <a href="#sec1"><span>Introducción</span><span class="num">01</span></a>
+    <a href="#sec2"><span>Conceptos clave</span><span class="num">02</span></a>
+    <a href="#sec3"><span>Principios</span><span class="num">03</span></a>
+    <a href="#sec4"><span>Evaluación</span><span class="num">04</span></a>
+  </nav>
+
+  <div id="sec1" style="margin-top:30px" class="card"><h3>Introducción</h3><p class="muted">Contenido literal de la diseñadora.</p></div>
+  <div id="sec2" style="margin-top:20px" class="card"><h3>Conceptos clave</h3><p class="muted">Contenido literal de la diseñadora.</p></div>
+  <div id="sec3" style="margin-top:20px" class="card"><h3>Principios</h3><p class="muted">Contenido literal de la diseñadora.</p></div>
+  <div id="sec4" style="margin-top:20px" class="card"><h3>Evaluación</h3><p class="muted">Contenido literal de la diseñadora.</p></div>
+  
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P19'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+/* ============================================================
+   CIDE DESIGN SYSTEM · Tema: Ingenieria (tecnico, limpio, moderno)
+   TEMA: redeclara SOLO variables de color (sin estructura ni logica).
+   Enlazar DESPUES de tokens.css en el <head>.
+   Para un tema nuevo: copia este archivo y cambia los tonos (aditivo).
+   ============================================================ */
+:root{
+  --bg:#ffffff;
+  --bg-elevated:#dae9c8;
+  --bg-strong:#ffffff;
+  --text-primary:#224a37;
+  --text-secondary:#1a1e16;
+    --text-muted:#33453c;
+  --text-on-accent:#ffffff;
+  --brand:#224a37;
+  --accent:#1a1e16;
+  --accent-hover:#224a37;
+  --ok:#224a37;
+  --ok-bg:#dcecd3;
+  --err:#d1442e;
+  --err-bg:#fbe6e0;
+  --warn:#92741a;
+  --warn-bg:#f9f6d6;
+  --info:#2b6cb0;
+  --cat-1:#224a37;
+  --cat-2:#1a1e16;
+  --cat-3:#7f8ea3;
+  --cat-4:#2b6cb0;
+  --border:#cdd8c9;
+  --border-strong:#224a37;
+  --divider:#d9ded9;
+}

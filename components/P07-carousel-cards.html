@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrusel de tarjetas · P07 · CIDE</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<style></style>
+</head>
+<body>
+<div class="hud"><div class="brand">CIDE <em>·</em> PRESET</div><div class="count">P07</div></div>
+<main class="container" style="padding-top:110px;padding-bottom:60px">
+
+  <style>
+    .carousel{display:flex;gap:16px;overflow-x:auto;padding:10px 4px 20px;scroll-snap-type:x mandatory}
+    .carousel::-webkit-scrollbar{height:8px}
+    .carousel::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
+    .c-card{flex:0 0 260px;scroll-snap-align:start;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-l);padding:24px;box-shadow:var(--sh-card)}
+    /* Estado activo: cide.js (initCards) agrega role="button" + tabindex y rota la clase .active al
+       hacer clic, pero el design system no la estilizaba — la tarjeta quedaba con cara de botón y
+       sin ningún cambio visible al pulsarla. Cada curso se escribía esta regla en su PAGE_CSS. */
+    .c-card.active{border-color:var(--brand);background:var(--ok-bg)}
+    .c-dots{display:flex;gap:8px;justify-content:center;margin-top:8px}
+    .c-dot{width:10px;height:10px;border-radius:50%;background:var(--border);cursor:pointer}
+    .c-dot.on{background:var(--brand)}
+  </style>
+  <p class="kicker">Preset P07 · carousel-cards</p>
+  <h2 style="margin:12px 0 6px">Carrusel de tarjetas</h2>
+  <p class="muted" style="margin-bottom:8px">Desliza horizontalmente entre tarjetas.</p>
+  <div class="carousel">
+    <div class="c-card"><h3>Tarjeta 1</h3><p class="muted">Contenido literal.</p></div>
+    <div class="c-card"><h3>Tarjeta 2</h3><p class="muted">Contenido literal.</p></div>
+    <div class="c-card"><h3>Tarjeta 3</h3><p class="muted">Contenido literal.</p></div>
+    <div class="c-card"><h3>Tarjeta 4</h3><p class="muted">Contenido literal.</p></div>
+  </div>
+  
+</main>
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/cide.js"></script>
+
+<a href="../index.html" style="position:fixed;right:18px;bottom:18px;z-index:250;background:#224a37;color:#fff;font:600 13px system-ui;text-decoration:none;padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25)">‹ Volver al catálogo</a>
+<script>/* Avisa al catálogo que este demo cargó de verdad (funciona incluso si lo abren
+   desde un ZIP, donde el catálogo no puede leer el contenido del iframe). */
+try{ if (window.parent !== window) window.parent.postMessage({cideDemo:'P07'}, '*'); }catch(e){}
+</script>
+</body>
+</html>

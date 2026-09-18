@@ -1,0 +1,125 @@
+/* ============================================================
+   CIDE DESIGN SYSTEM · Base (reset + tipografía + botones + utilidades)
+   Requiere tokens.css · v2.0.0 — Light mode institucional
+   ============================================================ */
+@layer base, cide-P01, cide-P02, cide-P03, cide-P04, cide-P05, cide-P06,
+       cide-P07, cide-P08, cide-P09, cide-P10, cide-P11, cide-P12,
+       cide-P13, cide-P14, cide-P15, cide-P16, cide-P17, cide-P18,
+       cide-P19, cide-P20, cide-P21, cide-P22, cide-P23, cide-P24,
+       cide-P25, cide-P26, cide-P27;
+@layer base{
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{
+  background:var(--bg); color:var(--text-primary);
+  font-family:var(--ff-body); font-size:var(--fs-body);
+  line-height:1.65; overflow-x:hidden;
+}
+::selection{background:var(--accent);color:var(--brand)}
+img{max-width:100%;display:block}
+
+/* ---- Tipografía ---- */
+.kicker{font-weight:700;letter-spacing:.32em;font-size:var(--fs-kicker);color:var(--brand);text-transform:uppercase}
+.display{font-family:var(--ff-display);font-weight:normal;font-size:var(--fs-display);line-height:.96;text-transform:uppercase}
+.display em{font-style:normal;color:var(--accent)}
+h1,h2,h3{line-height:1.15;color:var(--text-primary)}
+h1{font-size:var(--fs-h1)} h2{font-size:var(--fs-h2)} h3{font-size:var(--fs-h3)}
+.muted{color:var(--text-muted)}
+
+/* ---- Layout ---- */
+.container{width:100%;max-width:1100px;margin:0 auto;padding:var(--sp-6) 6vw}
+.screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:var(--sp-9) 6vw;position:relative;overflow:hidden}
+.glow{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;pointer-events:none;
+  width:55vw;height:55vw;top:-18vw;right:-12vw;background:radial-gradient(circle,rgba(247,179,159,.4),transparent 65%)}
+
+/* ---- Botón estándar: 6 estados obligatorios ---- */
+.btn{
+  display:inline-block;border:1px solid var(--border);background:var(--bg-strong);
+  color:var(--text-primary);font-family:var(--ff-body);font-size:var(--fs-body);font-weight:400;
+  padding:14px 20px;border-radius:var(--radius-m);cursor:pointer;text-align:left;
+  transition:all var(--t-fast) var(--ease); box-shadow:var(--sh-card);
+}
+.btn:hover{border-color:var(--accent);background:var(--bg-elevated);transform:translateX(4px);box-shadow:var(--sh-elevated)}
+.btn:active,.btn.down{background:var(--brand);color:var(--text-on-accent);border-color:var(--brand);transform:translateX(4px) scale(.98)}
+.btn.selected{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);font-weight:700}
+.btn.visited{border-style:dashed;color:var(--text-muted)}
+.btn:disabled,.btn.disabled,.btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.primary{background:var(--brand);color:var(--text-on-accent);font-weight:700;border:0;border-radius:var(--radius-pill);padding:15px 32px;box-shadow:var(--sh-card)}
+.btn.primary:hover{background:var(--text-secondary);transform:translateY(-3px);box-shadow:var(--sh-elevated)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+/* ---- Inputs: estados estándar ---- */
+input[type="range"],input[type="text"],select,textarea{
+  accent-color:var(--accent); font-family:var(--ff-body);
+}
+input:disabled,select:disabled,textarea:disabled{opacity:.45;cursor:not-allowed}
+input[type="range"]:disabled{accent-color:var(--divider)}
+input[type="text"],textarea{
+  background:var(--bg-strong); border:1px solid var(--border);
+  border-radius:var(--radius-s); color:var(--text-primary); padding:10px 14px;
+  transition:border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+input[type="text"]:hover:not(:disabled),textarea:hover:not(:disabled){border-color:var(--accent)}
+input:focus:not(:disabled),textarea:focus:not(:disabled),select:focus:not(:disabled){
+  border-color:var(--brand);outline:none;box-shadow:0 0 0 3px var(--ok-bg)}
+input:user-invalid,textarea:user-invalid{border-color:var(--err)}
+
+/* ---- Tarjeta ---- */
+.card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-l);padding:var(--sp-5);box-shadow:var(--sh-card)}
+.card:hover{box-shadow:var(--sh-elevated)}
+
+/* ---- Callout / bloque informativo ---- */
+.callout{margin-top:var(--sp-4);padding:var(--sp-4) 18px;border:1px solid var(--border);border-left:1px solid var(--brand);
+  background:linear-gradient(135deg,rgba(34,74,55,.04),rgba(34,74,55,.02));border-radius:var(--radius-m)}
+.callout b{display:block;color:var(--brand);margin-bottom:4px}
+
+/* ---- Feedback semánticos ---- */
+.feedback{margin-top:var(--sp-3);padding:13px 16px;border-radius:var(--radius-m);font-size:var(--fs-body);display:none}
+.feedback.ok{display:block;background:var(--ok-bg);border:1px solid rgba(34,74,55,.2);color:var(--ok)}
+.feedback.no{display:block;background:var(--err-bg);border:1px solid rgba(236,100,80,.3);color:var(--err)}
+.feedback.warn{display:block;background:var(--warn-bg);border:1px solid rgba(239,236,149,.5);color:#8a7a1a}
+.feedback.info{display:block;background:rgba(122,176,216,.1);border:1px solid rgba(122,176,216,.3);color:#1d5a8a}
+
+/* ---- HUD fijo (usa banda --z-sticky) ---- */
+.hud{position:fixed;top:0;left:0;right:0;z-index:var(--z-sticky);display:flex;justify-content:space-between;align-items:center;padding:22px 30px;pointer-events:none}
+.hud .brand{font-family:var(--ff-display-heavy);letter-spacing:.14em;font-size:.95rem;color:var(--text-primary)}
+.hud .brand em{font-style:normal;color:var(--accent)}
+.hud .count{font-family:var(--ff-display-heavy);font-size:.95rem;letter-spacing:.2em;color:var(--text-primary)}
+
+/* ---- Modal genérico (usa banda --z-overlay) — lo gestiona cide.js ---- */
+#cide-modal{position:fixed;inset:0;z-index:var(--z-overlay)}
+#cide-modal .modal-backdrop{position:absolute;inset:0;background:rgba(26,30,22,.55);backdrop-filter:blur(4px)}
+#cide-modal .modal-card{position:relative;max-width:560px;margin:auto;background:var(--bg-strong);border:1px solid var(--border);border-radius:var(--radius-l);box-shadow:var(--sh-modal);padding:var(--sp-6)}
+
+/* ---- Revelado animado (data-animate) ---- */
+[data-animate]{opacity:0;transform:translateY(30px)}
+.no-motion [data-animate],.revealed [data-animate]{opacity:1;transform:none;transition:all var(--t-slow) var(--ease)}
+
+/* ---- Breakpoints oficiales: sm 640 · md 820 · lg 1100 ---- */
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  [data-animate]{opacity:1;transform:none}
+}
+
+/* ---- Utilidades de espacio (opcional) ---- */
+.mt-1{margin-top:var(--sp-1)} .mt-2{margin-top:var(--sp-2)} .mt-3{margin-top:var(--sp-3)}
+.mt-4{margin-top:var(--sp-4)} .mt-5{margin-top:var(--sp-5)} .mt-6{margin-top:var(--sp-6)}
+.mb-1{margin-bottom:var(--sp-1)} .mb-2{margin-bottom:var(--sp-2)} .mb-3{margin-bottom:var(--sp-3)}
+.mb-4{margin-bottom:var(--sp-4)} .mb-5{margin-bottom:var(--sp-5)} .mb-6{margin-bottom:var(--sp-6)}
+
+/* ---- Glosario: tooltip accesible para términos (usa banda --z-dropdown) ---- */
+.glossary-term{
+  border-bottom:2px dotted var(--accent); cursor:help; color:var(--brand); font-weight:700;
+  position:relative;
+}
+.glossary-term::after{
+  content:attr(data-glossary);
+  position:absolute; left:50%; bottom:140%; transform:translateX(-50%) translateY(8px);
+  width:max-content; max-width:280px; background:var(--text-secondary); color:var(--bg);
+  font-size:.85rem; font-weight:400; line-height:1.4; padding:10px 14px; border-radius:var(--radius-s);
+  box-shadow:var(--sh-elevated); opacity:0; pointer-events:none; transition:all var(--t-fast) var(--ease);
+  z-index:var(--z-dropdown);
+}
+.glossary-term:hover::after,.glossary-term:focus::after{opacity:1;transform:translateX(-50%) translateY(0)}
+}
